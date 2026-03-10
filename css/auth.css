@@ -1,0 +1,152 @@
+:root{
+    --sidebar-color :#1E293B ;
+    --sidebar-text-color: #E5E7EB;
+     --sidebar-hover-color: #1b2433;
+     --sidebar-text-color: #E5E7EB;
+     --primary--color : var(--sidebar-color);
+    --text-color: #1E293B;
+    --background-color:#F8FAFC ;
+    --button-hover :#3a5072;
+    --button-color: var(--sidebar-color);
+    --button-text-color: var(--sidebar-text-color);
+    --box-shadow-color : #1b243313;
+    --font-family: "Inter", sans-serif ;
+    
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+h1 , h2 , h3 , h4 , h5 , h6 ,p  , a{
+    margin: 0;
+    font-family: "Inter", sans-serif ;
+    color: var(--text-color);
+}
+.container{
+    background: var(--background-color);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+
+}
+.login-container{
+    flex: 2;
+    background-color: var(--background-color);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.company{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary--color);
+}
+.company img {
+    width: 300px; 
+    height: auto;
+    object-fit: contain;
+}
+
+
+.form-container{
+    width:320px;
+    background:white;
+    padding:35px;
+    border-radius:10px;
+    box-shadow:0 10px 30px var(--box-shadow-color);
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    font-family:var(--font-family);
+}
+
+.form-container h2{
+    margin-bottom:10px;
+    color:var(--text-color);
+}
+
+.form-container label{
+    font-size:14px;
+    color:var(--button-hover);
+    font-family: var(--font-family);
+}
+
+.form-container input{
+    padding:10px 12px;
+    border:1px solid #E2E8F0;
+    border-radius:6px;
+    font-size:14px;
+    outline:none;
+}
+
+.form-container input:focus{
+    border-color:var(--primary--color);
+}
+
+.login-btn{
+    margin-top:10px;
+    padding:10px;
+    border:none;
+    border-radius:6px;
+    background:var(--button-color);
+    color:var(--button-text-color);
+    font-weight:500;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.login-btn:hover{
+    background:var(--button-hover);
+}
+.login-btn a {
+    text-decoration: none;
+    color: white;
+}
+.login-btn a:active {
+      text-decoration: none;
+    color: white;
+
+}
+@media screen and (max-width: 768px) {
+
+.container{
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+}
+
+
+.company{
+    flex: none;
+    height: 200px;
+}
+
+.company img{
+    width: 180px;
+}
+
+
+.login-container{
+    flex: none;
+    padding: 40px 20px;
+}
+
+
+.form-container{
+    width: 100%;
+    max-width: 350px;
+    padding: 25px;
+}
+
+
+
+
+
+.login-btn{
+    width: 100%;
+}
+
+}
+

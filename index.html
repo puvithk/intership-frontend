@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/teams.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    
+    <title>Home-Page | NexTeams</title>
+</head>
+<body>
+    <main class="container">
+           <aside class="sidebar">
+            <div class="sidebar-icon">
+             
+                <a class="sidebar-icon-name">NexTeams</a>
+                <p class="sidebar-icon-name-mobile ">NT</p>
+
+            </div>
+      <nav class="sidebar-nav"> 
+                <div ><a href="/"><img src="img/dashboard.png" alt="Dashboard logo"/> <span>Dashboard</span></a></div>
+                <div><a href="/chats.html"><img src="img/message.png" alt="Project logo"/><span>Chats</span></a></div>
+                <div><a href="/teams.html"><img src="img/team.png" alt="Teams logo"/><span>Teams</span></a></div>
+                <div><a href="/meeting.html"><img src="img/meeting.png" alt="Messages logo"/><span> Meetings</span></a></div>
+                <div><a href="/community.html"><img src="img/community.png" alt="Community logo"/><span>Community</span></a></div>
+                <div><a href="/settings.html"><img src="img/settings.png" alt="Settings logo"/><span>Settings</span></a></div>
+            </nav>
+            <div class="sidebar-profile">
+                    <img src="img/profile.png" alt="User profile"/>
+                    <div class="sidebar-profile-info">
+                        <h2>John Doe</h2>
+                        <h4>ADMIN</h4>
+
+            
+            </div>
+
+
+        </aside>
+        <main class="content">
+
+
+
+            <header class="header">
+                <h1>Welcome Back , Puvith!</h1>
+                  <div class="header-notification-icons">
+                    <img src="img/notification.png" alt="Notification logo"/>
+                    <span class="notification-count">3</span>
+                   <div class="notification">
+                    <p>You have 3 new notifications</p>
+                    <ul>
+                        <li>New message from Alice</li>
+                        <li>Project deadline approaching</li>
+                        <li>Team meeting at 3 PM</li>
+                    </ul>
+                </div>
+                </div> 
+            </header>
+
+
+            <section class="dashboard-details"> 
+                <div class="dashboard-total-project dashboard-cards">
+                    <p>Total Team</p>
+                    <h2>12</h2>
+                   
+                    
+                </div>
+                <div class="dashboard-task-completed dashboard-cards">
+                    <p>Total Meeting Today</p>
+                   
+                    <h2>4</h2>
+                </div>
+                <div class="dashboard-task-pending dashboard-cards">
+                    <p>Total Meeting pending</p>
+                    
+                    <h2>1</h2>
+                </div>
+
+            </section>
+        <section class="project-overview">
+    <h2>Meeting Details</h2>
+    <table class="project-details-table">
+        <thead>
+            <tr>
+                <th>Meeting Name</th>
+                <th>Participants</th>
+                <th>Status</th>
+                <th>Start Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="project-name" >Sprint Planning - Q3</td>
+                <td >
+                    <div class="team-members" >
+                        <img src="img/profile.png" alt="User 1"/>
+                        <img src="img/profile.png" alt="User 2"/>
+                        <img src="img/profile.png" alt="User 3"/>
+                    </div>
+                </td>
+                <td  ><span class="status completed">Completed</span></td>
+                <td>Today, 10:00 AM</td>
+                <td ><button class="edit-btn">View Notes</button></td>
+            </tr>
+            <tr>
+                <td class="project-name">Design Review</td>
+                <td> 
+                    <div class="team-members">
+                        <img src="img/profile.png" alt="User 1"/>
+                        <img src="img/profile.png" alt="User 2"/>
+                    </div>
+                </td>
+                <td><span class="status pending">Scheduled</span></td>
+                <td>Tomorrow, 02:30 PM</td>
+                <td><button class="edit-btn">Join Link</button></td>
+            </tr>
+            <tr>
+                <td class="project-name">Client Kickoff</td>
+                <td> 
+                    <div class="team-members">
+                        <img src="img/profile.png" alt="User 1"/>
+                        <img src="img/profile.png" alt="User 2"/>
+                        <img src="img/profile.png" alt="User 3"/>
+                        <img src="img/profile.png" alt="User 4"/>
+                    </div>
+                </td>
+                <td><span class="status live">Live Now</span></td>
+                <td>Started 5m ago</td>
+                <td><button class="edit-btn" >Join Now</button></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"><a href="/meeting.html" class="edit-btn" >Schedule New Meeting</a></td>
+            </tr>
+        </tfoot>
+    </table>
+</section>
+        </main>
+    </main>
+</body>
+</html>

@@ -1,0 +1,83 @@
+:root{
+    --sidebar-color :#1E293B ;
+    --sidebar-text-color: #E5E7EB;
+     --sidebar-hover-color: #1b2433;
+     --sidebar-text-color: #E5E7EB;
+     
+    --text-color: #1E293B;
+    --background-color:#F8FAFC ;
+    --button-hover :#3a5072;
+    --button-color: var(--sidebar-color);
+    --button-text-color: var(--sidebar-text-color);
+    --box-shadow-color : #1b243313;
+}
+.content{
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  
+}
+.teams-content{
+    background: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.teams-grid{
+display: flex;
+flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    
+}
+.team-card{
+
+    border-radius: 8px;
+  
+    box-shadow: var(--box-shadow-color) 1px 1px 5px;
+    width: 350px;
+    height: 350px;
+    justify-self: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    color: var(--text-color);
+    border: #1b243326 0.5px solid;
+
+}
+h2{
+    color: var(--text-color);
+}
+.team-card h3{
+    color: var(--text-color);
+    width: 100%;
+   
+}
+.team-card h4{
+    color: var(--button-hover);
+   
+}
+.team-card p{
+    font-size: 14px;
+
+}
+.team-card p:last-child{
+    justify-self: end;
+}
+.break{
+    width: 80%;
+    height: 1px;
+    background: var(--text-color);
+    }
+
+.team-card:hover{
+    box-shadow: var(--box-shadow-color) 2px 2px 10px;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
