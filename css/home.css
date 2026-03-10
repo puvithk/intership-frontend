@@ -1,0 +1,240 @@
+:root{
+    --sidebar-color :#1E293B ;
+    --sidebar-text-color: #E5E7EB;
+     --sidebar-hover-color: #1b2433;
+     --sidebar-text-color: #E5E7EB;
+     --primary--color : var(--sidebar-color);
+    --text-color: #1E293B;
+    --background-color:#F8FAFC ;
+    --button-hover :#3a5072;
+    --button-color: var(--sidebar-color);
+    --button-text-color: var(--sidebar-text-color);
+    --box-shadow-color : #1b243313;
+    --font-family: "Inter", sans-serif ;
+    
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+h1 , h2 , h3 , h4 , h5 , h6 ,p {
+    margin: 0;
+    font-family: "Inter", sans-serif ;
+    color: var(--text-color);
+}
+.home-header{
+    width: 100vw;
+    height: 64px;
+    background:var(--primary--color);
+    display: flex;
+    
+    
+}
+.logo-name {
+    padding: 10px;
+    margin-left: 10px;
+    display: flex;
+    color: #E5E7EB;
+    align-items: center;
+    gap: 10px ;
+}
+.logo-name h2 {
+    color: var(--sidebar-text-color);
+}
+.logo-name img{
+    width: 50px;
+    height: 50px;
+}
+.deatils-login{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 20px;
+}
+.deatils-login p {
+    color: var(--sidebar-text-color);
+    padding: 10px;
+
+}
+.deatils-login button{
+    background: var(--button-color);
+    padding: 10px;
+    border: var(--sidebar-text-color) 1px solid;
+    border-radius: 10px;
+    
+}
+.deatils-login button a {
+    text-decoration:  none;
+    color: var(--sidebar-text-color);
+
+}
+.text-image{
+    background-color: var(--background-color);
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+        url("/img/background cloud.png");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 120px;
+}
+.text{
+    flex:1;
+    max-width: 500px;
+}
+
+.text h2{
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.text p{
+    margin:20px 0;
+    font-size:18px;
+}
+
+.text button{
+    background: var(--sidebar-color);
+    padding: 10px;
+    border: #1b243313 1px solid;
+    box-shadow: var(--sidebar-color) 2px 2px 5px;
+    border-radius: 10px;
+
+}
+.text a {
+    text-decoration: none;
+    color: var(--background-color);
+}
+.text-image img{
+    width: 400px;
+    height: 300px;
+    margin-left: auto;
+    margin-right: 200px;
+
+}
+.man-image{
+    width:420px;
+}
+.background-image{
+    flex:1;
+    position: relative;
+    display:flex;
+    justify-content:center;
+}
+.home-page-image{
+    position: absolute;
+    bottom: -60px;
+    left: -120px;
+    width: 500px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border-radius: 12px;
+}
+.dashboard-image{
+    position:absolute;
+    bottom:-260px;
+    left:-20px;
+   width: 716px !important;
+
+height: auto !important;
+    box-shadow:0 10px 40px rgba(0,0,0,0.1);
+    border-radius:10px;
+}
+
+.webpage-info{
+    background-color: #1b2433;
+    width: 50vw;
+    height: 30vh;
+    margin-left: 60px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
+    justify-content: center;
+    box-shadow: var(--box-shadow-color) -5px 10px  5px ;
+}
+.webpage-info div {
+  padding: 20px;
+  margin-left: 50px;
+  border-bottom: #E5E7EB 1px solid;
+}
+.webpage-info div p , .webpage-info div h3 {
+    color: var(--sidebar-text-color);
+}
+
+
+@media (max-width:1080px){
+
+
+.home-header{
+    padding:0 10px;
+}
+
+.logo-name img{
+    width:40px;
+    height:40px;
+}
+
+.deatils-login{
+    gap:10px;
+}
+
+.deatils-login p{
+    display:none; 
+}
+
+
+.text-image{
+    flex-direction:column;
+    padding:40px 20px;
+    text-align:center;
+}
+
+.text{
+    max-width:100%;
+}
+
+.text h2{
+    font-size:28px;
+}
+
+.text p{
+    font-size:16px;
+}
+
+
+.background-image{
+    margin-top:40px;
+}
+
+
+.text-image img{
+    width:260px;
+    margin-left: 0 ;
+    margin-right: 0;
+}
+
+
+.dashboard-image{
+display: none;
+}
+
+
+.webpage-info{
+    width:90%;
+    height:auto;
+    margin:40px auto;
+    padding:20px 0;
+}
+
+.webpage-info div{
+    margin-left:20px;
+    padding:15px;
+}
+
+}

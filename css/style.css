@@ -3,7 +3,7 @@
     --sidebar-text-color: #E5E7EB;
      --sidebar-hover-color: #1b2433;
      --sidebar-text-color: #E5E7EB;
-     
+     --primary--color : var(--sidebar-color);
     --text-color: #1E293B;
     --background-color:#F8FAFC ;
     --button-hover :#3a5072;

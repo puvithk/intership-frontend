@@ -1,22 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="css/meeting.css">
-    <link rel="icon" href="img/logo.png">
+    <link rel="stylesheet" href="/css/teams.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="img/logo.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     
-    <title>Messages | NexTeams</title>
+    <title>DashBoard | NexTeams</title>
 </head>
 <body>
     <main class="container">
-            <aside class="sidebar">
+           <aside class="sidebar">
             <div class="sidebar-icon">
              
                 <a class="sidebar-icon-name">NexTeams</a>
@@ -47,7 +45,7 @@
 
 
             <header class="header">
-                <h1>Meeting Pages</h1>
+                <h1>Welcome Back , Puvith!</h1>
                   <div class="header-notification-icons">
                     <img src="img/notification.png" alt="Notification logo"/>
                     <span class="notification-count">3</span>
@@ -62,50 +60,29 @@
                 </div> 
             </header>
 
-<section class="create-meeting">
-    <div class="meeting-card">
-        <h2>Schedule a New Meeting</h2>
 
-        <form action="/meeting.html" class="create-meeting-form">
-
-            <div class="form-row">
-                <div class="form-input">
-                    <label for="meeting-name">Meeting Name</label>
-                    <input type="text" id="meeting-name" placeholder="Enter meeting name" required>
+            <section class="dashboard-details"> 
+                <div class="dashboard-total-project dashboard-cards">
+                    <p>Total Team</p>
+                    <h2>12</h2>
+                   
+                    
+                </div>
+                <div class="dashboard-task-completed dashboard-cards">
+                    <p>Total Meeting Today</p>
+                   
+                    <h2>4</h2>
+                </div>
+                <div class="dashboard-task-pending dashboard-cards">
+                    <p>Total Meeting pending</p>
+                    
+                    <h2>1</h2>
                 </div>
 
-                <div class="form-input">
-                    <label for="meeting-agenda">Agenda</label>
-                    <input type="text" id="meeting-agenda" placeholder="Enter meeting agenda" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-input">
-                    <label for="start-time" >Start Time</label>
-                    <input type="datetime-local" id="start-time" required>
-                </div>
-
-                <div class="form-input">
-                    <label for="end-time">End Time</label>
-                    <input type="datetime-local" id="end-time" required>
-                </div>
-            </div>
-
-            <button class="schedule-btn" type="submit">Schedule Meeting</button>
-
-        </form>
-    </div>
-</section>
-
-
-
-
-
-
-
-            
- <table class="project-details-table">
+            </section>
+        <section class="project-overview">
+    <h2>Meeting Details</h2>
+    <table class="project-details-table">
         <thead>
             <tr>
                 <th>Meeting Name</th>
@@ -156,12 +133,14 @@
                 <td><button class="edit-btn" >Join Now</button></td>
             </tr>
         </tbody>
-       
+        <tfoot>
+            <tr>
+                <td colspan="5"><a href="/meeting.html" class="edit-btn" >Schedule New Meeting</a></td>
+            </tr>
+        </tfoot>
     </table>
-   
-         
+</section>
         </main>
     </main>
 </body>
 </html>
-

@@ -3,13 +3,15 @@
     --sidebar-text-color: #E5E7EB;
      --sidebar-hover-color: #1b2433;
      --sidebar-text-color: #E5E7EB;
-     
+     --primary--color : var(--sidebar-color);
     --text-color: #1E293B;
     --background-color:#F8FAFC ;
     --button-hover :#3a5072;
     --button-color: var(--sidebar-color);
     --button-text-color: var(--sidebar-text-color);
     --box-shadow-color : #1b243313;
+    --font-family: "Inter", sans-serif ;
+    
 }
 .community-content{
     background: white;
