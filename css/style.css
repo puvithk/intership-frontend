@@ -23,6 +23,7 @@ h1 , h2 , h3 , h4 , h5 , h6 ,p {
     font-family: "Inter", sans-serif ;
     color: var(--text-color);
 }
+
 .container{
     background: var(--background-color);
     display: grid;
@@ -70,7 +71,9 @@ justify-content: center;
 }
 .sidebar-icon-name{
     margin-left: 10px;
-    font-size: 20px;
+    font-size: 25px;
+    text-decoration: none;
+    color: var(--sidebar-text-color);
 }
 
 .sidebar-nav{
@@ -385,7 +388,25 @@ border-bottom: #1b2433 2px solid;
     margin-right: 10px;
 }
 
+.logout{
+    background-color: var(--sidebar-color);
+    padding: 10px;
+    border-radius: 10px;
+    margin-right:6px ;
+    margin-left: auto;
+    box-shadow: var(--box-shadow-color) 2px 2px 5px;
+    border: var(--sidebar-color) 1px solid;
+}
+.logout a {
+    text-decoration: none;
+    color:var(--background-color);
+    font-family: var(--font-family);
 
+}
+.logout:hover{
+    background-color: var(--button-hover);
+
+}
 .notification-count{
     position: absolute;
     top: -5px;
@@ -426,6 +447,7 @@ border-bottom: #1b2433 2px solid;
     border-bottom: var(--box-shadow-color) 1px solid ;
     padding: 10px;
 }
+
 .header-notification-icons:hover > .notification{
     display: block;
 }
