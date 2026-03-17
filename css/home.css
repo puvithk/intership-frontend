@@ -19,8 +19,11 @@ body{
 }
 h1 , h2 , h3 , h4 , h5 , h6 ,p {
     margin: 0;
-    font-family: "Inter", sans-serif ;
+    font-family:var(--font-family);
     color: var(--text-color);
+}
+a {
+    font-family: var(--font-family);
 }
 .home-header{
     width: 100vw;
@@ -109,6 +112,7 @@ h1 , h2 , h3 , h4 , h5 , h6 ,p {
 .text a {
     text-decoration: none;
     color: var(--background-color);
+    font-family: var(--font-family);
 }
 .text-image img{
     width: 400px;
@@ -170,7 +174,21 @@ height: auto !important;
     background-color: var(--button-hover);
     cursor: pointer;
 }
-
+.title-data-minipulation{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+}
+.title-data-minipulation select{
+    margin-left: 30px;
+    height: 40px;
+    width:20%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-family: var(--font-family);
+    transition: 0.2s;
+}
 
 @media (max-width:1080px){
 

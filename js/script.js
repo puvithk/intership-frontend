@@ -1,0 +1,194 @@
+
+
+let users = JSON.parse(localStorage.getItem('userDetails'))
+let meetings = JSON.parse(localStorage.getItem('meetingDetails'))
+if(users==null){
+    let user = {
+        username : "Puvith",
+        password : "Puvith",
+        designation: "ADMIN"
+    }
+    let users = [user ]
+    localStorage.setItem('userDetails' , JSON.stringify(users))
+  
+}
+if(meetings== null){
+  let mockMeetings = [
+    {
+        meetingName: "Sprint Planning - Q3",
+        participants: [
+            "../img/profile.png",
+            "../img/profile1.png",
+            "../img/profile2.png"
+        ],
+        status: "Completed",
+        startTime: "Today, 10:00 AM",
+        action: "View Notes"
+    },
+    {
+        meetingName: "Design Review",
+        participants: [
+            "../img/profile2.png",
+            "../img/profile1.png"
+        ],
+        status: "Scheduled",
+        startTime: "Tomorrow, 02:30 PM",
+        action: "Join Link"
+    },
+    {
+        meetingName: "Client Kickoff",
+        participants: [
+            "../img/profile1.png",
+            "../img/profile2.png",
+            "../img/profile.png",
+            "../img/profile4.png"
+        ],
+        status: "Live Now",
+        startTime: "Started 5m ago",
+        action: "Join Now"
+    }
+]
+localStorage.setItem("meetingDetails" , JSON.stringify(mockMeetings))
+meetings = localStorage.getItem("meetingDetails")
+}
+
+const login = (event) =>{
+
+    const form = event.target
+    const username = form.username.value 
+     
+    let currentUser = users.find(x => x.username === username)
+
+    console.log(currentUser)
+
+    if (currentUser) {
+        localStorage.setItem("currentUser" , JSON.stringify(currentUser))
+        window.location.href = "/html/home.html"
+     
+    } else {
+        alert("User not found")
+      
+    }
+    return false
+}
+const changeBar = (classname) => {
+    const sidebarTitle = document.getElementsByClassName(classname.trim())[0]
+
+    if (sidebarTitle) {
+        sidebarTitle.classList.add("sidebar-active")
+    }
+}
+const setActiveMenu = () => {
+
+    const page = window.location.pathname.split("/").pop()
+
+    console.log(page) // for debugging
+
+    if (page === "home.html") changeBar("dashboard")
+    if (page === "chats.html") changeBar("chats")
+    if (page === "teams.html") changeBar("teams")
+    if (page === "meeting.html") changeBar("meetings")
+    if (page === "community.html") changeBar("community")
+    if (page === "settings.html") changeBar("settings")
+
+}
+const sideBar = () => {
+
+    const sidebar = `
+        <div class="sidebar-icon">
+            <a href="/" class="sidebar-icon-name">NexTeams</a>
+            <p class="sidebar-icon-name-mobile">NT</p>
+        </div>
+
+        <nav class="sidebar-nav"> 
+            <div class="dashboard">
+                <a href="../html/home.html">
+                    <img src="../img/dashboard.png" alt="Dashboard logo"/>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+
+            <div class="chats">
+                <a href="../html/chats.html">
+                    <img src="../img/message.png" alt="Chats logo"/>
+                    <span>Chats</span>
+                </a>
+            </div>
+
+            <div class="teams">
+                <a href="../html/teams.html">
+                    <img src="../img/team.png" alt="Teams logo"/>
+                    <span>Teams</span>
+                </a>
+            </div>
+
+            <div class="meetings">
+                <a href="../html/meeting.html">
+                    <img src="../img/meeting.png" alt="Meetings logo"/>
+                    <span>Meetings</span>
+                </a>
+            </div>
+
+            <div class="community">
+                <a href="../html/community.html">
+                    <img src="../img/community.png" alt="Community logo"/>
+                    <span>Community</span>
+                </a>
+            </div>
+
+            <div class="settings">
+                <a href="../html/settings.html">
+                    <img src="../img/settings.png" alt="Settings logo"/>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="sidebar-profile">
+            <img src="../img/profile.png" alt="User profile"/>
+            <div class="sidebar-profile-info">
+                <h2>PUVITH</h2>
+                <h4>ADMIN</h4>
+            </div>
+        </div>
+    `
+
+    const asideSidebar = document.getElementsByClassName('sidebar')[0]
+    asideSidebar.innerHTML = sidebar
+
+    setActiveMenu()
+}
+
+sideBar()
+
+
+const notification = (message , status ) => {
+    const container = document.querySelector(".container");
+    const alert = document.createElement("div");
+    alert.className = "notification-alert";
+    alert.style.top = 0
+    alert.innerHTML = `
+        <div class="name-close">
+            <h2>Notification</h2>
+            <button class="close-button">X</button>
+        </div>
+        <div class="progress ${status}-progress"></div>
+        <div class="notification-message ">
+            <p class="${status}">${message}</p>
+        </div>
+    `;
+
+
+    container.appendChild(alert);
+
+    alert.querySelector(".close-button").addEventListener("click", () => {
+        alert.remove();
+    });
+
+
+    setTimeout(() => {
+        alert.style.top = '100px'
+        alert.remove();
+    }, 5000);
+};
+

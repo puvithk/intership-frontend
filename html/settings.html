@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="/css/settings.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="icon" href="img/logo.png">
+    <link rel="icon" href="/img/logo.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     
@@ -16,29 +16,9 @@
 </head>
 <body>
     <main class="container">
-              <aside class="sidebar">
-            <div class="sidebar-icon">
-             
-                <a href="/" class="sidebar-icon-name">NexTeams</a>
-                <p class="sidebar-icon-name-mobile ">NT</p>
-
-            </div>
-      <nav class="sidebar-nav"> 
-                <div ><a href="/home.html"><img src="img/dashboard.png" alt="Dashboard logo"/> <span>Dashboard</span></a></div>
-                <div><a href="/chats.html"><img src="img/message.png" alt="Project logo"/><span>Chats</span></a></div>
-                <div><a href="/teams.html"><img src="img/team.png" alt="Teams logo"/><span>Teams</span></a></div>
-                <div><a href="/meeting.html"><img src="img/meeting.png" alt="Messages logo"/><span> Meetings</span></a></div>
-                <div><a href="/community.html"><img src="img/community.png" alt="Community logo"/><span>Community</span></a></div>
-                <div><a href="/settings.html"><img src="img/settings.png" alt="Settings logo"/><span>Settings</span></a></div>
-            </nav>
-            <div class="sidebar-profile">
-                    <img src="img/profile.png" alt="User profile"/>
-                    <div class="sidebar-profile-info">
-                        <h2>PUVITH</h2>
-                        <h4>ADMIN</h4>
-
-            
-            </div>
+      
+          <aside class="sidebar">
+           
 
 
         </aside>
@@ -49,7 +29,7 @@
             <header class="header">
                 <h1>Settings</h1> <button class="logout"><a href="/">Logout</a></button>
                 <div class="header-notification-icons">
-                    <img src="img/notification.png" alt="Notification logo"/>
+                    <img src="/img/notification.png" alt="Notification logo"/>
                     <span class="notification-count">3</span>
                    <div class="notification">
                     <p>You have 3 new notifications</p>
@@ -72,7 +52,7 @@
     <div class="card-header">
         <div class="user-info">
 
-            <img src="img/profile.png" alt="Profile" class="avatar">
+            <img src="/img/profile.png" alt="Profile" class="avatar">
 
             <div class="user-text">
                 <h2>PUVITH</h2>
@@ -107,9 +87,18 @@
         <span>Settings</span>
 
     </div>
+    
+</div>
+<div class="admin-button">
+    <button>Create Community</button>
+<button onclick="openCreateUser()">Create User</button>
+<button onclick="openCreateTeam()">Create team</button>
 
 </div>
+<div class="admin-container">
 
+
+</div>
 </div>
 
 
@@ -120,5 +109,7 @@
         </main>
     </main>
 </body>
+<script src="/js/script.js"></script>
+<script src="/js/settings.js"></script>
 </html>
 

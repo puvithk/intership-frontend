@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/meeting.css">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    
+    <title>Messages | NexTeams</title>
+</head>
+<body>
+    <main class="container">
+          <aside class="sidebar">
+         
+     
+
+
+        </aside>
+        <main class="content">
+
+
+
+            <header class="header">
+                <h1>Meeting Pages</h1> <button class="logout"><a href="/">Logout</a></button>
+                  <div class="header-notification-icons">
+                    <img src="../img/notification.png" alt="Notification logo"/>
+                    <span class="notification-count">3</span>
+                   <div class="notification">
+                    <p>You have 3 new notifications</p>
+                    <ul>
+                        <li>New message from Alice</li>
+                        <li>Project deadline approaching</li>
+                        <li>Team meeting at 3 PM</li>
+                    </ul>
+                </div>
+                </div> 
+            </header>
+
+<section class="create-meeting">
+    <div class="meeting-card">
+        <h2>Schedule a New Meeting</h2>
+
+        <form onsubmit="createMeeting(event)" class="create-meeting-form">
+
+            <div class="form-row">
+                <div class="form-input">
+                    <label for="meeting-name">Meeting Name</label>
+                    <input type="text" id="meeting-name" name="name" placeholder="Enter meeting name" required>
+                </div>
+
+                <div class="form-input">
+                    <label for="meeting-agenda">Agenda</label>
+                    <input type="text" id="meeting-agenda" name="agenda" placeholder="Enter meeting agenda" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-input">
+                    <label for="start-time" >Start Time</label>
+                    <input type="datetime-local" id="start-time" name="start" required>
+                </div>
+
+                <div class="form-input">
+                    <label for="end-time">End Time</label>
+                    <input type="datetime-local" id="end-time" name="end" required>
+                </div>
+            </div>
+
+            <button class="schedule-btn" type="submit">Schedule Meeting</button>
+
+        </form>
+    </div>
+</section>
+
+
+
+
+
+
+
+            
+ <table class="project-details-table">
+        <thead>
+            <tr>
+                <th>Meeting Name</th>
+                <th>Participants</th>
+                <th>Status</th>
+                <th>Start Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+        </tbody>
+       
+    </table>
+   
+         
+        </main>
+    </main>
+</body>
+<script src="/js/script.js"></script>
+<script src="/js/meeting.js" ></script>
+</html>
+

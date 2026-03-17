@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" href="/img/logo.png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    
+    <title>DashBoard | NexTeams</title>
+</head>
+<body>
+    <main class="container">
+           <aside class="sidebar">
+          
+
+        </aside>
+        <main class="content">
+
+
+
+            <header class="header">
+                <h1>Welcome Back , Puvith!</h1> <button class="logout"><a href="/">Logout</a></button>
+                  <div class="header-notification-icons">
+                    <img src="../img/notification.png" alt="Notification logo"/>
+                    <span class="notification-count">3</span>
+                   <div class="notification">
+                    <p>You have 3 new notifications</p>
+                    <ul>
+                        <li>New message from Alice</li>
+                        <li>Project deadline approaching</li>
+                        <li>Team meeting at 3 PM</li>
+                    </ul>
+                </div>
+                </div> 
+            </header>
+
+
+            <section class="dashboard-details"> 
+                <div class="dashboard-total-project dashboard-cards">
+                    <p>Total Team</p>
+                    <h2 id="total-teams">12</h2>
+                   
+                    
+                </div>
+                <div class="dashboard-task-completed dashboard-cards">
+                    <p>Total Meeting Today</p>
+                   
+                    <h2 id="total-meetings">4</h2>
+                </div>
+                <div class="dashboard-task-pending dashboard-cards">
+                    <p>Total Meeting pending</p>
+                    
+                    <h2>1</h2>
+                </div>
+
+            </section>
+        <section class="project-overview">
+            <div class="title-data-minipulation form-input">
+            <h2>Meeting Details</h2>
+            <select id="meeting-filter">
+                <option value="">All meetings</option>
+                <option value="Lastest">Lastest Meeting</option>
+                <option value="Completed">Completed Meeting</option>
+                <option value="Scheduled">Schedule Meeting</option>
+            </select>
+            </div>
+    
+    <table class="project-details-table">
+        <thead>
+            <tr>
+                <th>Meeting Name</th>
+                <th>Participants</th>
+                <th>Status</th>
+                <th>Start Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"><a href="../html/meeting.html" class="edit-btn" >Schedule New Meeting</a></td>
+            </tr>
+        </tfoot>
+    </table>
+</section>
+        </main>
+    </main>
+</body>
+<script src="/js/script.js"></script>
+<script src="/js/home.js" ></script>
+</html>

@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/teams.css">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    
+    <title>Teams | NexTeams</title>
+</head>
+<body>
+    <main class="container" id="container">
+
+       <div class="team-details" id="team-details">
+            <header class="team-name">
+                <h2 id="team-name">Team name</h2>
+                <button class="close-button" onclick="closeTeamMemberModel()">X</button>
+            </header>
+       <table class="team-members">
+    <thead>
+        <tr>
+            <th>Team Member</th>
+            <th>Designation</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>Puvith</td>
+            <td>Developer</td>
+            <td><button  onclick="window.location.href='/html/chats.html'" class="edit-btn">Message</button></td>
+        </tr>
+        <tr>
+            <td>Sarah</td>
+            <td>Designer</td>
+            <td><button onclick="window.location.href='/html/chats.html'" class="edit-btn">Message</button></td>
+        </tr>
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="3">Total Members: 2</td>
+        </tr>
+    </tfoot>
+</table>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <aside class="sidebar">
+           
+    
+
+
+        </aside>
+        <main class="content">
+
+            <header class="header">
+                <h1>Teams Pages</h1>
+                <button class="logout"><a href="/">Logout</a></button>
+                  <div class="header-notification-icons">
+                    
+                    <img src="/img/notification.png" alt="Notification logo"/>
+                    <span class="notification-count">3</span>
+                   <div class="notification">
+                    <p>You have 3 new notifications</p>
+                    <ul>
+                        <li>New message from Alice</li>
+                        <li>Project deadline approaching</li>
+                        <li>Team meeting at 3 PM</li>
+                    </ul>
+                </div>
+                </div> 
+            </header>
+<section class="teams-content">
+    <header class="teams-header">
+       
+        <div class="form-input">
+           
+           <input type="text" placeholder="Search Team" id="search-team">
+        </div>
+        
+    </header>
+
+  <div class="teams-grid" id="teams-grid">
+        
+   
+
+
+</div>
+</section>
+
+
+
+
+
+
+
+         
+        </main>
+    </main>
+</body>
+<script src="/js/script.js"></script>
+<script src="/js/teams.js"  ></script>
+</html>
+

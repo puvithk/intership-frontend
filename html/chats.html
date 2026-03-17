@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/chats.css">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    
+    <title>Chats | NexTeams</title>
+</head>
+<body>
+    <main class="container">
+         <aside class="sidebar">
+           
+
+        </aside>
+        <main class="content">
+
+
+
+            <header class="header">
+                <h1>Chats Pages</h1> <button class="logout"><a href="/">Logout</a></button>
+                 <div class="header-notification-icons">
+                    <img src="../img/notification.png" alt="Notification logo"/>
+                    <span class="notification-count">3</span>
+                   <div class="notification">
+                    <p>You have 3 new notifications</p>
+                    <ul>
+                        <li>New message from Alice</li>
+                        <li>Project deadline approaching</li>
+                        <li>Team meeting at 3 PM</li>
+                    </ul>
+                </div>
+                </div> 
+            </header>
+
+            <main class="chats-content">
+                <section class="chat-list">
+                    <h2>Chats</h2>
+                    <ul>
+                        
+                        <li>
+                               <button class="chat-user" onclick="openChat('Divyashree' , '../img/profile2.png')">
+                                <img src="../img/profile2.png" alt="User profile"/>
+                                <span>Divyashree</span>
+                                </button>
+                        </li>
+                        <li><button class="chat-user" onclick="openChat('Virat' , '../img/profile1.png')">
+                            <img src="../img/profile1.png" alt="User profile"/> 
+                            <span>Virat</span></li></button>
+                        </li>
+                        <li><button class="chat-user" onclick="openChat('You' , '../img/profile.png')">
+                            <img src="../img/profile.png" alt="User profile"/>
+                             <span>You</span></li></button>
+                    </ul>
+                    <h2>Channels</h2>
+                    <ul>
+                        <li><span>General</span></li>
+                        <li><span>Project-x</span></li>
+                        <li><span>Team 1</span></li>
+                </section>
+                <section class="message-window">
+                    <header>
+                        <img id="chat-profile" src="../img/profile2.png" alt="User profile"/>
+                        <h2 id="chat-name">Divyashree</h2>
+                        <span id="chat-status">Online</span>
+                    </header>
+                    <div class="messages">
+                        <div class="message received">
+                            <p>Hey, how's the project going?</p>
+                            <span class="timestamp">10:30 AM</span>
+                        </div>
+                        <div class="message sent">
+                            <p>It's going well! Just finished the latest update.</p>
+                            <span class="timestamp">10:32 AM</span>
+                        </div>
+                        <div class="message received">
+                            <p>Great to hear! Let's catch up later.</p>
+                            <span class="timestamp">10:35 AM</span>
+                        </div>
+                        
+                       <div class="chat-input">
+    <input type="text"  placeholder="Type a message...">
+    <button>Send</button>
+</div>
+                </section>
+            </main>
+         
+        </main>
+    </main>
+</body>
+<script src="/js/script.js"></script>
+<script src="/js/chats.js"></script>
+</html>
+
