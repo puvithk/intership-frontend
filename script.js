@@ -5,7 +5,7 @@ let meetings = JSON.parse(localStorage.getItem('meetingDetails'))
 if(users==null){
     let user = {
         name : "Puvith",
-        password : "Puvith",
+        password : "",
         designation: "ADMIN"
     }
     let users = [user ]
@@ -63,7 +63,7 @@ const login = (event) =>{
 
     if (currentUser) {
         localStorage.setItem("currentUser" , JSON.stringify(currentUser))
-        window.location.href = "/html/home.html"
+        globalThis.location.href = "/html/home.html"
      
     } else {
         
@@ -83,7 +83,7 @@ const changeBar = (classname) => {
 // checking which page is active 
 const setActiveMenu = () => {
 
-    const page = window.location.pathname.split("/").pop()
+    const page = globalThis.location.pathname.split("/").pop()
 
     console.log(page) // for debugging
 

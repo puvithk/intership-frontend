@@ -48,9 +48,9 @@ const updateTotalMeeting =() =>{
         const [day, month, year] = datePart.split("/");
 
         return (
-            parseInt(day) === today.getDate() &&
-            parseInt(month) === (today.getMonth() + 1) &&
-            parseInt(year) === today.getFullYear()
+            Number.parseInt(day) === today.getDate() &&
+            Number.parseInt(month) === (today.getMonth() + 1) &&
+           Number.parseInt(year) === today.getFullYear()
         );
     });
 

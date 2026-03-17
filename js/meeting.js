@@ -38,7 +38,7 @@ const createMeeting = (event)=>{
     event.preventDefault()
     const form = event.target
     const meetingName = form.name.value
-    const meetingAgenda = form.agenda.value
+
     const meetingStart = new Date(form.start.value);
     const meetingEnd = new Date(form.end.value);
     const now = new Date();
