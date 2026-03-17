@@ -1,4 +1,12 @@
-
+// Check the currect user and undate the text
+const checkUsernameUpdate = ()=>{
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+    const usernameTag = document.getElementById('user-name')
+    const designationTag =document.getElementById("user-designation")
+    usernameTag.innerText = currentUser.name
+    designationTag.innerText = currentUser.designation
+}
+// check premission if admin as some extra previlage 
 const checkPremission = () =>{
     let currentUser = JSON.parse(localStorage.getItem("currentUser"))
     const adminButtons = document.querySelectorAll('.admin-button')
@@ -8,8 +16,7 @@ const checkPremission = () =>{
 
     }
 }
-checkPremission()
-
+// Create user form for admin 
 const createUserForm = `
 <form class="create-user-form" id="userForm" onsubmit="createUser(event)" >
 
@@ -67,7 +74,7 @@ const createUserForm = `
 
 </form>
 `
-
+//Fucntion to open the create panel
 const openCreateUser = ()=>{
     console.log("Clicked")
     const container = document.getElementsByClassName("admin-container")[0]
@@ -85,7 +92,7 @@ const createUser = (event) => {
     const designation = form.designation.value.trim();
     const work_details = form.work_details.value.trim();
     const password = form.password.value.trim();
-
+    // check weather all fields are there 
     if (!name || !email || !organization || !designation || !work_details || !password) {
         notification("All fields are required", "fail");
         return;
@@ -124,7 +131,7 @@ const createUser = (event) => {
     form.reset();
 };
 
-
+// Create team function
 const openCreateTeam= ()=>{
     let allUsers = ''
     console.log(users)
@@ -207,3 +214,8 @@ const createTeam = (event) =>{
     localStorage.setItem("teamDetails" , JSON.stringify(teamsData))
     notification(`Created team ${team.team_name}` , "success")
 }
+
+
+// Calling the functions automaticllay when loading 
+checkPremission()
+checkUsernameUpdate()

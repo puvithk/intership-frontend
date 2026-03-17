@@ -1,3 +1,4 @@
+// On  click to open new chats 
 const openChat = (name , path)=>{
     const chatName = document.getElementById("chat-name")
     const chatStatus = document.getElementById("chat-status")

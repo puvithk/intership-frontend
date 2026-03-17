@@ -1,4 +1,4 @@
-
+// Update the meeting grid
 const updateMeetings = () => {
 
     const meetingBody = document.querySelector("tbody")
@@ -31,9 +31,9 @@ const updateMeetings = () => {
 
     meetingBody.innerHTML = allMeetings
 }
-updateMeetings()
 
 
+// create the meeting 
 const createMeeting = (event)=>{
     event.preventDefault()
     const form = event.target
@@ -72,3 +72,6 @@ const createMeeting = (event)=>{
 updateMeetings();
     notification("Meeting Created Succesfully" , "success")
 }
+
+// Calling function automatically when loading 
+updateMeetings()

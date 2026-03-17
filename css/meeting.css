@@ -89,10 +89,40 @@
 .schedule-btn:hover{
     background: var(--button-hover);
 }
- .project-details-table{
-    overflow-y: auto !important;
-    color: var(--sidebar-color);
- }
+.project-details-table{
+    width: 100%;
+    text-align: center;
+    padding: 40px;
+    margin-top: 10px;
+    border-collapse: collapse;
+    transition: all 0.3s ease;
+    
+}
+.project-details-table thead  {
+    background: var(--background-color);
+    border: var(--background-color) 1px solid;
+}
+.project-details-table td {
+     font-family: "Inter", sans-serif ;
+    font-weight: 300;
+    text-align: start;
+ 
+    padding: 20px;
+
+    margin:0;
+}
+.project-details-table th{
+         font-family: "Inter", sans-serif ;
+    font-weight: 600;
+    text-align: start;
+ 
+    padding: 20px;
+
+    margin:0;
+}
+.project-details-table  tr {
+    border-bottom: var(--background-color) 3px solid;
+}
 @media screen and (max-width: 768px) {
     .form-row{
         flex-direction: column;

@@ -4,7 +4,7 @@ let users = JSON.parse(localStorage.getItem('userDetails'))
 let meetings = JSON.parse(localStorage.getItem('meetingDetails'))
 if(users==null){
     let user = {
-        username : "Puvith",
+        name : "Puvith",
         password : "Puvith",
         designation: "ADMIN"
     }
@@ -51,13 +51,13 @@ if(meetings== null){
 localStorage.setItem("meetingDetails" , JSON.stringify(mockMeetings))
 meetings = localStorage.getItem("meetingDetails")
 }
-
+// FInd user from the localStorge and login 
 const login = (event) =>{
 
     const form = event.target
     const username = form.username.value 
-     
-    let currentUser = users.find(x => x.username === username)
+     console.log(users)
+    let currentUser = users.find(x => x.name === username)
 
     console.log(currentUser)
 
@@ -66,11 +66,13 @@ const login = (event) =>{
         window.location.href = "/html/home.html"
      
     } else {
+        
         alert("User not found")
       
     }
     return false
 }
+// Adding the active class
 const changeBar = (classname) => {
     const sidebarTitle = document.getElementsByClassName(classname.trim())[0]
 
@@ -78,6 +80,7 @@ const changeBar = (classname) => {
         sidebarTitle.classList.add("sidebar-active")
     }
 }
+// checking which page is active 
 const setActiveMenu = () => {
 
     const page = window.location.pathname.split("/").pop()
@@ -92,8 +95,9 @@ const setActiveMenu = () => {
     if (page === "settings.html") changeBar("settings")
 
 }
+// Sidebar for all page 
 const sideBar = () => {
-
+    const currectUser = JSON.parse(localStorage.getItem('currentUser'))
     const sidebar = `
         <div class="sidebar-icon">
             <a href="/" class="sidebar-icon-name">NexTeams</a>
@@ -147,8 +151,8 @@ const sideBar = () => {
         <div class="sidebar-profile">
             <img src="../img/profile.png" alt="User profile"/>
             <div class="sidebar-profile-info">
-                <h2>PUVITH</h2>
-                <h4>ADMIN</h4>
+                <h2>${currectUser.name}</h2>
+                <h4>${currectUser.designation}</h4>
             </div>
         </div>
     `
@@ -161,12 +165,13 @@ const sideBar = () => {
 
 sideBar()
 
-
+// Notificastion 
 const notification = (message , status ) => {
     const container = document.querySelector(".container");
     const alert = document.createElement("div");
     alert.className = "notification-alert";
     alert.style.top = 0
+    // Created a strcutred and added css 
     alert.innerHTML = `
         <div class="name-close">
             <h2>Notification</h2>
@@ -178,14 +183,14 @@ const notification = (message , status ) => {
         </div>
     `;
 
-
+    // Add toi the main container 
     container.appendChild(alert);
 
     alert.querySelector(".close-button").addEventListener("click", () => {
         alert.remove();
     });
 
-
+    // Make only for 5 sec
     setTimeout(() => {
         alert.style.top = '100px'
         alert.remove();

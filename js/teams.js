@@ -1,3 +1,4 @@
+//Predified data for teams 
 let teamsData = [
   {
     "team_id": 1,
@@ -35,9 +36,11 @@ if(teamData.length == 0 ){
     localStorage.setItem("teamDetails" , JSON.stringify(teamsData))
     teamData = teamsData
 }
+// Load data to the gird 
 const loadteamData = ()=>{
     const teamsGrid = document.getElementById("teams-grid")
     let teams = ""
+    // Loop all the data and put into the team grid 
     for(let team of teamData){
         teams += `
         <article class="team-card" id="team-card">
@@ -56,6 +59,7 @@ const loadteamData = ()=>{
     }
     teamsGrid.innerHTML = teams
 }
+// Call automaticlly during loading of the page 
 loadteamData()
 // Function to open the team members Details 
 const openTeamMemberModel = (teamName) =>{
@@ -68,7 +72,7 @@ const openTeamMemberModel = (teamName) =>{
     container.classList.add('blur')
     sidebar.classList.add('blur')
 }
-
+// Closer the model make the display none , remove the blur
 const closeTeamMemberModel= ()=>{
     const teamDeatils = document.getElementById("team-details")
     const container = document.getElementsByClassName("content")[0]

@@ -26,6 +26,10 @@ h1 , h2 , h3 , h4 , h5 , h6 ,p  ,button {
 button{
     background-color: var(--button-color);
 }
+button:disabled{
+    background-color: var(--button-hover) !important;
+    cursor: not-allowed !important;
+}
 .container{
     background: var(--background-color);
     display: grid;

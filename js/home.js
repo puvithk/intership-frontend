@@ -1,4 +1,4 @@
-
+// Update the meeting to the grid 
 const updateMeetings = () => {
 
     const meetingBody = document.querySelector("tbody")
@@ -31,14 +31,14 @@ const updateMeetings = () => {
 
     meetingBody.innerHTML = allMeetings
 }
-
+// Update total team get the team and count 
 const updateTotalTeam = ()=>{
     const teams = JSON.parse(localStorage.getItem("teamDetails")) || []
     const teamCount = teams.length
     const teamCountElemnt = document.getElementById("total-teams")
     teamCountElemnt.innerText = teamCount
 }
-
+// Get the meeting and count 
 const updateTotalMeeting =() =>{
     const meetings = JSON.parse(localStorage.getItem("meetingDetails")) || []
     const today = new Date();
@@ -105,12 +105,15 @@ const updateMeetingsUsingFilter = (filter ) => {
 
     meetingBody.innerHTML = allMeetings
 }
-updateTotalMeeting()
-updateMeetings()
-updateTotalTeam()
+
 //  Get the filtering element
 const meetingFilterElemet = document.getElementById("meeting-filter")
 // Add event listerner
 meetingFilterElemet.addEventListener('change' , (e)=>{
     updateMeetingsUsingFilter(e.target.value)
 })
+
+// calling automaticlly when reloading 
+updateTotalMeeting()
+updateMeetings()
+updateTotalTeam()
