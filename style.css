@@ -12,6 +12,7 @@
     --box-shadow-color : #1b243313;
     --font-family: "Inter", sans-serif ;
     --dark-sidebar-color :#1b2433;
+    --error-message :#991b1b;
 }
 
 body{

@@ -71,7 +71,7 @@
                         <h2 id="chat-name">Divyashree</h2>
                         <span id="chat-status">Online</span>
                     </header>
-                    <div class="messages">
+                    <div class="messages" id="message-grid">
                         <div class="message received">
                             <p>Hey, how's the project going?</p>
                             <span class="timestamp">10:30 AM</span>
@@ -85,10 +85,11 @@
                             <span class="timestamp">10:35 AM</span>
                         </div>
                         
-                       <div class="chat-input">
-    <input type="text"  placeholder="Type a message...">
-    <button>Send</button>
-</div>
+                    </div> 
+                        <div class="chat-input">
+        <input id="chat-input-text" type="text"  placeholder="Type a message...">
+        <button onclick="sendMessages()">Send</button>
+    </div>
                 </section>
             </main>
          

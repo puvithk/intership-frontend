@@ -72,6 +72,11 @@ a {
     color: var(--sidebar-text-color);
 
 }
+.deatils-login button:hover{
+    background-color: var(--button-hover);
+    border: none;
+    scale: 1.05;
+}
 .text-image{
     background-color: var(--background-color);
     background-image: 

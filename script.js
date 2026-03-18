@@ -51,6 +51,10 @@ if(meetings== null){
 localStorage.setItem("meetingDetails" , JSON.stringify(mockMeetings))
 meetings = localStorage.getItem("meetingDetails")
 }
+const loading = `<div class="loading">
+                            <div class="inner-cirle"></div>
+                             <p>Loading Messages</p>
+                        </div>`
 // FInd user from the localStorge and login 
 const login = (event) =>{
 
@@ -58,16 +62,19 @@ const login = (event) =>{
     const username = form.username.value 
      console.log(users)
     let currentUser = users.find(x => x.name === username)
-
+    const errorMessage = document.getElementById("error-messages")
     console.log(currentUser)
 
     if (currentUser) {
         localStorage.setItem("currentUser" , JSON.stringify(currentUser))
+
         globalThis.location.href = "/html/home.html"
+       
      
     } else {
-        
-        alert("User not found")
+        errorMessage.classList.add("fail-progress")
+        errorMessage.innerText = "User not found"
+
       
     }
     return false

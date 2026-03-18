@@ -9,11 +9,16 @@ const updateMeetings = () => {
         } );
     meetings.reverse()
     meetings.forEach(element => {
-
-        const participantsHTML = element.participants
+        let participantsHTML ;
+        if(element.participants.length === 0){
+            participantsHTML = `<p>No participants</p>`
+        }else {
+            participantsHTML = element.participants
             .map(imgsPath => `<img src="${imgsPath}" alt="user"/>`)
             .join("")
-
+          
+        }
+        
         allMeetings += `
         <tr>
             <td class="project-name">${element.meetingName}</td>

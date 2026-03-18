@@ -4,6 +4,7 @@
      --sidebar-hover-color: #1b2433;
      --sidebar-text-color: #E5E7EB;
      --primary--color : var(--sidebar-color);
+     --secondary--color : #ffffff;
     --text-color: #1E293B;
     --background-color:#F8FAFC ;
     --button-hover :#3a5072;
@@ -11,7 +12,8 @@
     --button-text-color: var(--sidebar-text-color);
     --box-shadow-color : #1b243313;
     --font-family: "Inter", sans-serif ;
-    
+    --error-message :#991b1b;
+    --success-messges : forestgreen
 }
 body{
     margin: 0;
@@ -19,7 +21,7 @@ body{
 }
 h1 , h2 , h3 , h4 , h5 , h6 ,p  , a , button{
     margin: 0;
-    font-family: "Inter", sans-serif ;
+    font-family: var(--font-family) ;
     color: var(--text-color);
 }
 .container{
@@ -48,11 +50,15 @@ h1 , h2 , h3 , h4 , h5 , h6 ,p  , a , button{
     height: auto;
     object-fit: contain;
 }
-
-
+.fail-progress{
+    color: var(--error-message);
+}
+.success  {
+    color: var(--success-messges);
+}
 .form-container{
     width:320px;
-    background:white;
+    background:var(--secondary--color);
     padding:35px;
     border-radius:10px;
     box-shadow:0 10px 30px var(--box-shadow-color);
@@ -102,11 +108,11 @@ h1 , h2 , h3 , h4 , h5 , h6 ,p  , a , button{
 }
 .login-btn a {
     text-decoration: none;
-    color: white;
+    color: var(--secondary--color);
 }
 .login-btn a:active {
       text-decoration: none;
-    color: white;
+    color: var(--secondary--color);
 
 }
 @media screen and (max-width: 768px) {

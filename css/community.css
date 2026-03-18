@@ -42,10 +42,10 @@
 
 }
 
-.all-community-list h2{
+.all-community-list h3{
     color: var(--text-color);
     font-family: "Inter", sans-serif ;
-    font-weight: 600;
+   
     margin-bottom: 10px;
 }
 .all-community-list ul{
@@ -58,7 +58,7 @@
     align-items: center;
     gap: 10px;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     color: var(--text-color);
     font-family: "Inter", sans-serif ;
     font-weight: 300;
@@ -69,18 +69,51 @@
 .all-community-list li:hover{
     background: var(--sidebar-hover-color);
     color: var(--sidebar-text-color);
-    border-radius: 0;
+    border-radius: 8px;
 }
-.all-community-list li:first-child{
-    background: var(--sidebar-hover-color);
-    color: var(--sidebar-text-color);
-     border-radius: 0;
+
+.community-li.active {
+    background: var(--primary--color);
+    border-radius: 8px;
 }
+
+
+.community-li.active .community-buttom {
+    color: white;
+}
+
+
+
+
+
+
+
 
 .all-community-list img{
     width: 30px;
     height: 30px;
     border-radius: 50%;
+}
+
+
+.community-buttom{
+    width: 100%;
+    height: 100%;
+    background:none ;
+    border: none;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 20px;
+    font-family: var(--font-family);
+    color: var(--text-color);
+    border-radius: 20px;
+}
+.community-buttom:hover{
+    background: var(--box-shadow-color);
+    color: var(--background-color);
+    cursor: pointer;
+    border-radius: 20px;
 }
 
 
@@ -92,9 +125,8 @@
     overflow: hidden; 
 }
 
-.community-blog-feed h2 {
+.community-blog-feed h3 {
     margin-bottom: 15px;
-    font-size: 1.2rem;
     color: var(--text-color);
 }
 

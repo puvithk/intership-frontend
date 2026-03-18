@@ -137,8 +137,8 @@ const openCreateTeam= ()=>{
     console.log(users)
     console.log("Came ")
     for(let user of users){
-        allUsers+= `<option value='${user.username}'>${user.username}</option>`
-        console.log(user.username)
+        allUsers+= `<option value='${user.name}'>${user.name}</option>`
+     
         
     }console.log(allUsers)
     const createTeamForm = `
@@ -200,7 +200,7 @@ const createTeam = (event) =>{
     }
 
 
-    let teamsData = JSON.parse(localStorage.getItem('teamsDetails')) || [];
+    let teamsData = JSON.parse(localStorage.getItem('teamDetails')) || [];
     let lastTeam = teamsData.length ? teamsData.at(-1) : { team_id: 0 };
 
 
@@ -211,6 +211,7 @@ const createTeam = (event) =>{
         team_lead
     }
     teamsData.push(team)
+    console.log(teamsData)
     localStorage.setItem("teamDetails" , JSON.stringify(teamsData))
     notification(`Created team ${team.team_name}` , "success")
 }
