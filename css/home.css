@@ -195,6 +195,22 @@ height: auto !important;
     transition: 0.2s;
 }
 
+.footer{
+   
+   position: fixed;
+   bottom: 0px;
+width: 100%;
+
+    background: var(--sidebar-color);
+    margin: 0;
+    text-align: center;
+    padding: 10px;
+
+}
+.footer p {
+    color: var(--sidebar-text-color);
+}
+
 @media (max-width:1080px){
 
 

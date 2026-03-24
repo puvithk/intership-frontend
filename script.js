@@ -60,21 +60,22 @@ const login = (event) =>{
 
     const form = event.target
     const username = form.username.value 
+    const password = form.password.value
      console.log(users)
     let currentUser = users.find(x => x.name === username)
     const errorMessage = document.getElementById("error-messages")
     console.log(currentUser)
 
-    if (currentUser) {
+    if (currentUser.password ===  password) {
         localStorage.setItem("currentUser" , JSON.stringify(currentUser))
 
-        globalThis.location.href = "/html/home.html"
+        globalThis.location.href = "/html/home.html" 
        
      
     } else {
         errorMessage.classList.add("fail-progress")
-        errorMessage.innerText = "User not found"
-
+        errorMessage.innerText = "Username or password is wrong"
+       
       
     }
     return false

@@ -1,3 +1,5 @@
+
+
 // Check the currect user and undate the text
 const checkUsernameUpdate = ()=>{
     const currentUser = JSON.parse(localStorage.getItem("currentUser"))
@@ -16,6 +18,12 @@ const checkPremission = () =>{
 
     }
 }
+
+
+const checkPassword = (password) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+};
 // Create user form for admin 
 const createUserForm = `
 <form class="create-user-form" id="userForm" onsubmit="createUser(event)" >
@@ -67,6 +75,7 @@ const createUserForm = `
         <div class="form-input">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter password" required>
+             <p id="password-message" class="password-message">*Min 8 chars: upper, lower, number, special.</p>
         </div>
     </div>
 
@@ -74,12 +83,30 @@ const createUserForm = `
 
 </form>
 `
+const validColor = 'green';
+const validDecorator = 'line-through'
+const invalidColor = 'red';
+const invalidDecorator =  'none'
 //Fucntion to open the create panel
 const openCreateUser = ()=>{
-    console.log("Clicked")
+
     const container = document.getElementsByClassName("admin-container")[0]
     container.style.display = "block"
     container.innerHTML =  createUserForm; 
+    const passwordCheck = document.getElementById('password-message')
+    const passwordInput = document.getElementById('password')
+    passwordInput.addEventListener('input' , (e)=>{
+         const password = e.target.value;
+    
+      
+    if (checkPassword(password)) {
+        passwordCheck.style.color = validColor;
+        passwordCheck.style.textDecoration = validDecorator
+    } else {
+        passwordCheck.style.color = invalidColor;
+        passwordCheck.style.textDecoration = invalidDecorator;
+    }
+    })
 }
 const createUser = (event) => {
     event.preventDefault();
@@ -96,6 +123,20 @@ const createUser = (event) => {
     if (!name || !email || !organization || !designation || !work_details || !password) {
         notification("All fields are required", "fail");
         return;
+    }
+    const emailRexeg =  /^[^@\s]+@[^@\s]+\.[^@\s]+$/ ; 
+    if(!emailRexeg.test(email)){
+        notification("Enter an valid email" , 'fail')
+        return
+    } 
+    let currentUser = users.find(x => x.email === email)
+    if(currentUser){
+        notification("Email is already present" , 'fail')
+        return
+    }
+    if(!checkPassword(password)){
+        notification("Min 8 chars: upper, lower, number, special" , 'fail')
+        return
     }
     const dob = form.dob.value;
     const today = new Date();
@@ -117,7 +158,6 @@ const createUser = (event) => {
     };
 
    
-    let users = JSON.parse(localStorage.getItem("userDetails")) || [];
 
    
     users.push(user);

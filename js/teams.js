@@ -88,10 +88,14 @@ const searchTeam = (word) =>{
     // Teams 
     let filterData = teamData.filter((element)=>{
         
-        return element.team_name.toLowerCase().includes(word.toLowerCase().trim()) || element.team_description.toLowerCase().includes(word.toLowerCase().trim())
+        return element.team_name.toLowerCase().includes(word.toLowerCase().trim()) 
+        || element.team_description.toLowerCase().includes(word.toLowerCase().trim())
     })
+
+
+
     // teams the update 
-     const teamsGrid = document.getElementById("teams-grid")
+    const teamsGrid = document.getElementById("teams-grid")
     let teams = ""
     for(let team of filterData){
         teams += `

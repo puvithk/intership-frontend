@@ -15,7 +15,7 @@ const openChat = (name , path)=>{
     
 }
 const sendMessages = ()=>{
-    const message = document.getElementById('chat-input-text').value;
+    const message = document.getElementById('chat-input-text');
     const meessageGrid = document.getElementById("message-grid")
     const currentTime = new Date().toLocaleTimeString([], {
             hour: '2-digit',
@@ -23,9 +23,10 @@ const sendMessages = ()=>{
             hour12: true
             });
     const messageTemplte = `<div class="message sent">
-                            <p>${message}</p>
+                            <p>${message.value}</p>
                             <span class="timestamp">${currentTime}</span>
                         </div>`
     meessageGrid.innerHTML += messageTemplte
+    message.value = ''
     
 }
