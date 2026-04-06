@@ -152,7 +152,26 @@ const getAllMeetingDB = async()=>{
         console.log("Error")
     }
 }
+const getMeetingFromId = async (meetingId) => {
+    try {
+        const db = await openMeetingDB();
+        const tx = db.transaction('teamMeeting', 'readonly');
+        const store = tx.objectStore('teamMeeting');
 
+        const meeting = await new Promise((resolve, reject) => {
+            const request = store.get(meetingId);
+
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(new Error("Meeting not found"));
+        });
+
+        return meeting || null;
+
+    } catch (e) {
+        console.log("Error:", e);
+        return null;
+    }
+};
 const addMeetingDB =  async (meetingObject)=>{
     try {
          const db = await openMeetingDB()
@@ -288,7 +307,7 @@ const openUserTeamDB = async () => {
                     keyPath: ["userId", "teamId"] 
                 });
 
-                // ✅ indexes
+             
                 store.createIndex("userId", "userId", { unique: false });
                 store.createIndex("teamId", "teamId", { unique: false });
             }
@@ -598,6 +617,80 @@ const getChatMessages = async (chatId) => {
         throw error;
     }
 };
+
+
+// Meeting participants 
+
+
+
+const CreateMappingUserMeeting = ({userId , meetingId , participated = false})=>{
+    return {userId , meetingId , participated}
+}
+const openUserMeetingDB = async () => {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open("participantsDB", 1);
+
+        request.onupgradeneeded = (e) => {
+            const db = e.target.result;
+
+      
+            if (!db.objectStoreNames.contains("userMeeting")) {
+                const store = db.createObjectStore("userMeeting", {
+                    keyPath: ["userId", "meetingId"] 
+                });
+
+                store.createIndex("userId", "userId", { unique: false });
+                store.createIndex("meetingId", "meetingId", { unique: false });
+    
+            }
+        };
+
+        request.onsuccess = (e) => resolve(e.target.result);
+        request.onerror = (e) => reject(e.target.error);
+    });
+};
+
+const mapUsersToMeeting = async (userIds, meetingIds) => {
+    try {
+        const db = await openUserMeetingDB();
+
+       
+        const users = Array.isArray(userIds) ? userIds : [userIds];
+        const meetings = Array.isArray(meetingIds) ? meetingIds : [meetingIds];
+
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction("userMeeting", "readwrite");
+            const store = tx.objectStore("userMeeting");
+
+            users.forEach(userId => {
+                meetings.forEach(meetingId => {
+
+                    const mapping = CreateMappingUserMeeting({
+                        userId,
+                        meetingId,
+                        participated: false
+                    });
+
+                    store.put(mapping); 
+                });
+            });
+
+            tx.oncomplete = () => {
+                resolve("Users mapped to meeting successfully");
+            };
+
+            tx.onerror = (e) => {
+                reject(e.target.error);
+            };
+        });
+
+    } catch (e) {
+        console.log("Error mapping users:", e);
+        throw e;
+    }
+};
+
+
 /*Database Functions */
 
 

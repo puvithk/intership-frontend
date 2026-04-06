@@ -1,12 +1,27 @@
 let meetings  =[]
+ const parseCustomDate = (dateStr) => {
 
+    const [datePart, timePart] = dateStr.split(", ");
+
+    const [day, month, year] = datePart.split("/").map(Number);
+    const [hours, minutes, seconds] = timePart.split(":").map(Number);
+
+    return new Date(year, month - 1, day, hours, minutes, seconds);
+    };
 
 // Update the meeting to the grid 
 const updateMeetings =async () => {
-
+    const userId = JSON.parse(localStorage.getItem('currentUser')).user_id
     const meetingBody = document.querySelector("tbody")
     let allMeetings = ""
-    meetings =await getAllMeetingDB()
+    meetings =await getMeetingFromUserId(userId)
+
+    if(meetings.length === 0){
+        const tr = document.createElement('tr')
+        tr.innerHTML = `<td colspan='3'>No meetings</td>`
+        meetingBody.append(tr)
+        return
+    }
     const parseCustomDate = (dateStr) => {
     const [datePart, timePart] = dateStr.split(", ");
 
@@ -90,7 +105,7 @@ const updateTotalMeeting = async() =>{
 
 // Function for Updated the table 
 const updateMeetingsUsingFilter = (filter ) => {
-    console.log(filter)
+
     const meetingBody = document.querySelector("tbody")
     let filteredMeeting ;
     if(filter=="Completed"){
@@ -102,23 +117,38 @@ const updateMeetingsUsingFilter = (filter ) => {
             return value.status === 'Scheduled'
         })
     }else if(filter=="Lastest"){
-       filteredMeeting =  meetings.sort((a, b) => {
+       filteredMeeting =  meetings.toSorted((a, b) => {
     return  new Date(b.startTime) - new Date(a.startTime);
+    
         } );
-   
-    }else {
+    filteredMeeting.reverse()
+    }else if(filter=="Today"){
+        const today = new Date();
+
+        filteredMeeting = meetings.filter((meeting) => {
+        const meetingDate = parseCustomDate(meeting.startTime);
+
+        return (
+            meetingDate.getDate() === today.getDate() &&
+            meetingDate.getMonth() === today.getMonth() &&
+            meetingDate.getFullYear() === today.getFullYear()
+        );
+    });
+}
+    else {
         filteredMeeting = meetings
     }
 
     let allMeetings = ""
-    const parseCustomDate = (dateStr) => {
-    const [datePart, timePart] = dateStr.split(", ");
-
-    const [day, month, year] = datePart.split("/").map(Number);
-    const [hours, minutes, seconds] = timePart.split(":").map(Number);
-
-    return new Date(year, month - 1, day, hours, minutes, seconds);
-    };
+   
+    if(filteredMeeting.length===0){
+        meetingBody.innerHTML = ''
+        const tr = document.createElement('tr')
+        tr.innerHTML = `<td colspan='3'>No meetings</td>`
+        meetingBody.append(tr)
+        return
+    }
+   
     filteredMeeting.forEach(element => {
 
          let action = "";
@@ -152,8 +182,7 @@ const updateMeetingsUsingFilter = (filter ) => {
         //     .join("")
           
         // }
-        console.log(action)
-        console.log("Actions up ")
+
         allMeetings += `
         <tr>
             <td class="project-name">${element.meetingName}</td>

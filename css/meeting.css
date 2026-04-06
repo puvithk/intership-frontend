@@ -140,3 +140,36 @@
     }
 
 }
+
+
+.user-list {
+    max-height: 150px;
+    overflow-y: auto;
+    margin-top: 5px;
+}
+
+.user-item {
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.user-item:hover {
+    background: #f0f0f0;
+}
+
+.selected-users {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.selected-tag {
+    background: #1f2937;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+}
