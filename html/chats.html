@@ -18,7 +18,7 @@
     <main class="container">
          <aside class="sidebar">
         </aside>
-        <main class="content">
+        <main class="content" >
 
 
 
@@ -37,56 +37,29 @@
                 </div>
                 </div> 
             </header>
-
+            <div class="loading" id="loading">
+                            <div class="inner-cirle"></div>
+                             <p>Loading Messages</p>
+                        </div>
             <main class="chats-content">
-                <section class="chat-list">
+                <section class="chat-list" id="chat-list-section">
                     <h2>Chats</h2>
-                    <ul>
+                    <ul id="chat-list">
                         
-                        <li>
-                               <button class="chat-user" onclick="openChat('Divyashree' , '../img/profile2.png')">
-                                <img src="../img/profile2.png" alt="User profile"/>
-                                <span>Divyashree</span>
-                                </button>
-                        </li>
-                        <li>
-                            <button class="chat-user" onclick="openChat('Virat' , '../img/profile1.png')">
-                            <img src="../img/profile1.png" alt="User profile"/> 
-                            <span>Virat</span></li>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="chat-user" onclick="openChat('You' , '../img/profile.png')">
-                            <img src="../img/profile.png" alt="User profile"/>
-                             <span>You</span></li>
-                            </button>
+                 
                     </ul>
                     <h2>Channels</h2>
-                    <ul>
-                        <li><span>General</span></li>
-                        <li><span>Project-x</span></li>
-                        <li><span>Team 1</span></li>
+                    <ul id="channel-list">
+               
                 </section>
-                <section class="message-window">
+                <section class="message-window" id="message-window" >
                     <header>
                         <img id="chat-profile" src="../img/profile2.png" alt="User profile"/>
-                        <h2 id="chat-name">Divyashree</h2>
+                        <h2 id="chat-name"></h2>
                         <span id="chat-status">Online</span>
                     </header>
                     <div class="messages" id="message-grid">
-                        <div class="message received">
-                            <p>Hey, how's the project going?</p>
-                            <span class="timestamp">10:30 AM</span>
-                        </div>
-                        <div class="message sent">
-                            <p>It's going well! Just finished the latest update.</p>
-                            <span class="timestamp">10:32 AM</span>
-                        </div>
-                        <div class="message received">
-                            <p>Great to hear! Let's catch up later.</p>
-                            <span class="timestamp">10:35 AM</span>
-                        </div>
-                        
+             
                     </div> 
                         <div class="chat-input">
         <input id="chat-input-text" type="text"  placeholder="Type a message...">

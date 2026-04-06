@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/meet.css">
+    <link rel="icon" href="/img/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    
+    <title>Meet | NexTeams</title>
+</head>
+<body>
+<main>
+<header>
+    <div class="logo"></div>
+    <div class="buttons">
+        <div class="icons">
+            <i class="fa-solid fa-table-cells-large"></i>
+             <p>Layout</p>
+        </div>
+   <div class="icons">
+        <i class="fa-solid fa-comment"></i>
+        <p>Chat</p>
+     </div>
+       <div class="icons">
+        <i class="fa-solid fa-microphone"></i>
+        <p>Mute</p>
+       </div>
+
+       <div class="icons">
+       <img src="/img//icons/cast.png" alt="">
+       <p class="share-screen">Share Screen</p>   
+    </div>
+
+       <div class="icons end-call" >
+        <i class="fa-solid fa-phone-slash"></i>
+           <p>End Call</p>
+       </div>
+       
+    
+    </div>
+</header>
+    <main class="main-section-join hide">
+        <div class="overlay hide"></div>
+        <div class="join-meeting hide">
+            <div class="video-settings">
+                <div class="info">
+                    <h3>Camera Settings</h3>
+                </div>
+                <div class="camera-options">
+                    
+                    <select id="cameras">
+                    </select>
+                </div>
+                <div class="video-wrap">
+                    <video id="webcam" aria-label="Camera preview">
+                    </video>
+                </div>
+                <div class="camera-toggle">
+                    <label class="switch">
+                    <input type="checkbox" id="webcam-toggle">
+                    <span class="slider round"></span>
+                    </label>
+                    <p>Start Camera / Stop Camera</p>
+                </div>
+                <div class="join-now">
+                    <button>Join now</button>
+                </div>
+            </div>
+            <div class="audio-settings">
+
+    <div class="info">
+        <h3>Audio Settings</h3>
+    </div>
+
+    <!-- Microphone -->
+    <div class="audio-options">
+        <label>Select Microphone</label>
+        <select id="microphone">
+       
+        </select>
+    </div>
+
+    <!-- Speaker -->
+    <div class="audio-options">
+        <label>Select Output</label>
+        <select id="output-audio">
+            
+        </select>
+    </div>
+
+    <!-- Mic Test -->
+    <div class="audio-options">
+        <p>Microphone Test</p>
+        <div class="progress-microphone">
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+    <!-- Speaker Test -->
+    <div class="audio-options">
+        <p>Speaker Test</p>
+        <div class="output-speaker">
+            <i class="fa-solid fa-play"></i> Play Test Sound
+        </div>
+    </div>
+
+</div>
+        </div>
+    </main>
+    <main>
+      <div class="main-section-meet">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    
+      </div> 
+      
+      
+    </main>
+    
+</main>
+
+</body>
+<script src="/js/meet.js"></script>
+</html>

@@ -1,4 +1,10 @@
 
+const user = JSON.parse(localStorage.getItem('currentUser'))
+
+
+
+
+
 
 // Check the currect user and undate the text
 const checkUsernameUpdate = ()=>{
@@ -108,7 +114,7 @@ const openCreateUser = ()=>{
     }
     })
 }
-const createUser = (event) => {
+const createUser =async (event) => {
     event.preventDefault();
 
     const form = event.target;
@@ -129,6 +135,7 @@ const createUser = (event) => {
         notification("Enter an valid email" , 'fail')
         return
     } 
+    let users = await getAllUsersDB()
     let currentUser = users.find(x => x.email === email)
     if(currentUser){
         notification("Email is already present" , 'fail')
@@ -147,23 +154,23 @@ const createUser = (event) => {
     }
  
 
-    const user = {
-        name: name,
-        email: email,
-        organization: organization,
-        designation: designation,
-        dob: dob,
-        work_details: work_details,
-        password: password
-    };
 
+    const user = createUserObject({
+        name:name , 
+        email:email,
+        organization:organization,
+        designation:designation,
+        dob:dob, 
+        work_details : work_details,
+        password:password
+    })
    
 
    
-    users.push(user);
+    await addUserDB(user)
 
    
-    localStorage.setItem("userDetails", JSON.stringify(users));
+    
 
     console.log("User stored:", users);
 
@@ -172,17 +179,16 @@ const createUser = (event) => {
 };
 
 // Create team function
-const openCreateTeam= ()=>{
+const openCreateTeam=async ()=>{
     let allUsers = ''
-    console.log(users)
-    console.log("Came ")
+    let users = await getAllUsersDB()
     for(let user of users){
-        allUsers+= `<option value='${user.name}'>${user.name}</option>`
+        allUsers+= `<option value='${user.user_id}'>${user.name}</option>`
      
         
     }console.log(allUsers)
     const createTeamForm = `
-<form class="create-user-form" id="teamForm" onsubmit="createTeam(event)" >
+<form class="create-user-form" id="teamForm" onsubmit="handleCreateTeam(event)" >
 
     <div class="form-row">
         <div class="form-input">
@@ -216,13 +222,12 @@ const openCreateTeam= ()=>{
     container.innerHTML =  createTeamForm;
 }
 
-const createTeam = (event) =>{
-    event.preventDefault()
-   
+const handleCreateTeam = async (event) => {
+    event.preventDefault();
+
     const team_name = document.getElementById("team_name").value.trim();
     const team_description = document.getElementById("team_description").value.trim();
     const team_lead = document.getElementById("team_lead").value;
-
 
     if (!team_name) {
         notification("Team name is required", "fail");
@@ -239,23 +244,16 @@ const createTeam = (event) =>{
         return;
     }
 
+    const team = createTeamObject({
+        teamName: team_name,
+        teamDescription: team_description,
+        teamLead: team_lead // ⚠️ fix here also
+    });
 
-    let teamsData = JSON.parse(localStorage.getItem('teamDetails')) || [];
-    let lastTeam = teamsData.length ? teamsData.at(-1) : { team_id: 0 };
+    await createTeamsDB(team)
 
-
-    const team = {
-        team_id: lastTeam.team_id + 1,
-        team_name,
-        team_description,
-        team_lead
-    }
-    teamsData.push(team)
-    console.log(teamsData)
-    localStorage.setItem("teamDetails" , JSON.stringify(teamsData))
-    notification(`Created team ${team.team_name}` , "success")
-}
-
+    notification(`Created team ${team.teamName}`, "success");
+};
 
 // Calling the functions automaticllay when loading 
 checkPremission()

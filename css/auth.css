@@ -115,6 +115,21 @@ h1 , h2 , h3 , h4 , h5 , h6 ,p  , a , button{
     color: var(--secondary--color);
 
 }
+.form-row{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px; 
+    position: relative;
+    
+}
+.show-password{
+    top: 59%;
+right: 20px;
+    
+    position: absolute;
+    color: var(--sidebar-color);
+}
 @media screen and (max-width: 768px) {
 
 .container{

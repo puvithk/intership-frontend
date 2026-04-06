@@ -182,7 +182,7 @@ h2{
 .team-members thead, 
 .team-members tbody, 
 .team-members tfoot {
-    display: table-row-group; /* Default behavior */
+    display: table-row-group; 
 }
 
 .team-members tr {
@@ -196,4 +196,98 @@ h2{
 }
 .team-members td {
     padding: 20px;
+}
+
+
+
+.member-container {
+    display: flex;
+    justify-self: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* LEFT SECTION */
+.member-left {
+    flex: 1;
+}
+
+/* Search input */
+#searchUser {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+#searchUser:focus {
+    border-color: #4ade80;
+    box-shadow: 0 0 3px rgba(74, 222, 128, 0.5);
+}
+
+/* User list */
+.user-list {
+    border: 1px solid #ddd;
+    max-height: 180px;
+    overflow-y: auto;
+    border-radius: 6px;
+    padding: 5px 0;
+    background: #fff;
+}
+
+/* Each user */
+.user-item {
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-item:hover {
+    background: #f5f5f5;
+}
+
+/* RIGHT SECTION */
+.member-right {
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Add button */
+#addBtn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+  margin-left: 10px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.2s;
+}
+
+
+
+/* Selected users */
+.selected-users {
+    margin-top: 10px;
+}
+
+/* Tags */
+.tag {
+    display: inline-block;
+    background: #4ade80;
+    padding: 4px 10px;
+    margin: 3px;
+    border-radius: 12px;
+    color: white;
+    font-size: 12px;
 }

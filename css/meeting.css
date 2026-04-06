@@ -19,8 +19,19 @@
     margin-top: 40px;
     color: var(--text-color);
 }
-
-
+.no-meeting{
+    margin: 50px;
+}
+.content{
+    position: relative !important;
+    overflow-x: hidden;
+}
+.footer {
+    position: fixed;
+    width: calc(100vw - 270px);
+    bottom: 0;
+    align-self: center;
+}
 .meeting-card{
     background: white;
     padding: 30px 40px;

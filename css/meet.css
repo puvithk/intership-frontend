@@ -1,0 +1,336 @@
+:root{
+    --sidebar-color :#1E293B ;
+    --sidebar-text-color: #E5E7EB;
+     --sidebar-hover-color: #1b2433;
+     --sidebar-text-color: #E5E7EB;
+     --primary--color : var(--sidebar-color);
+    --text-color: #1E293B;
+    --background-color:#F8FAFC ;
+    --button-hover :#3a5072;
+    --button-color: var(--sidebar-color);
+    --button-text-color: var(--sidebar-text-color);
+    --box-shadow-color : #1b243313;
+    --font-family: "Inter", sans-serif ;
+    --dark-button :#101724;
+    
+}
+body{
+    padding: 0;
+    margin: 0;
+}
+main{
+    background: var(--sidebar-color);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    color: var(--sidebar-text-color);
+  justify-content: center;
+  align-items: center;
+
+}
+.main-section-join{
+    display: flex;
+    justify-content: center;
+  
+}
+header{
+    display: flex;
+    
+    height: 64px;
+    border-bottom: #3a50723b 2px solid;
+    justify-content: space-between;
+    padding: 10px;
+    position: fixed;
+    width: 100vw;
+   
+}
+p ,h3 , h5 , h6 {
+    color: var(--sidebar-text-color);
+    font-family: var(--font-family);
+    padding: 0;
+    margin: 0;
+    align-self: center;
+}
+div{
+    font-family: var(--font-family);
+}
+.buttons{
+    display: flex;
+    
+    align-items: center;
+}
+.buttons .icons{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: end;
+    border-left: #3a5072 2px solid;
+    font-size: 1.5rem;
+    width: 4rem;
+    height: 3rem;
+    padding: 5px;
+    color: var(--sidebar-text-color);
+    
+}
+.buttons .icons p{
+    color: var(--sidebar-text-color);
+    font-size: 10px;
+ margin-top: 10px;
+}
+.buttons .icons .share-screen{
+    margin-top: 2px;
+}
+.buttons .end-call{
+    font-size: 1.3rem;
+    
+    color: red;
+}
+.buttons .icons img{
+    width: 2.5rem;
+    height: 2.5rem;
+    filter: invert();
+}
+.buttons .icons:hover i , .buttons .icons:hover img{
+    transform: scale(1.05);
+    cursor: pointer;
+}
+.overlay{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #00000081;
+    z-index:2;
+}
+.join-meeting{
+    border:#3a50723b 2px solid ;
+    width: 50vw;
+    height: 60vh;
+    padding: 10px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: #3a50723b 5px 5px  5px;
+    z-index:3 ;
+    background-color:var(--sidebar-color);
+}
+.join-meeting .video-settings{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+  
+}
+.join-meeting video{
+    margin-top: 20px ;
+    width: 80%;
+    background-color: #101724;
+    border: #3a50723b 2px solid;
+    min-width: 286px;
+    max-height: 130px;
+}
+.join-meeting .video-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.join-meeting .camera-options{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.join-meeting .camera-toggle{
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+    background: var(--sidebar-color);
+    color: var(--sidebar-text-color);
+    border: #3a50723b 2px solid;
+    border-radius: 10px;
+    font-size: 15px;
+    gap: 10px;
+}
+
+.join-meeting select{
+    width: 90%;
+    padding: 10px;
+    text-align: center;
+    background: var(--sidebar-color);
+    color: var(--sidebar-text-color);
+    border: #3a50723b 2px solid;
+    border-radius: 10px;
+    font-size: 15px;
+
+}
+
+.audio-settings {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.audio-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+
+.audio-options label,
+.audio-options p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+
+
+
+
+.progress-microphone {
+    width: 100%;
+    height: 8px;
+    background: #1b2433;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+.progress-bar {
+    height: 100%;
+    width: 30%;
+    background: linear-gradient(90deg, #14a248, #4ade80);
+    border-radius: 10px;
+    transition: width 0.3s;
+}
+
+
+.output-speaker {
+    background: var(--sidebar-color);
+    border: 1px solid #3a50723b;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.output-speaker:hover {
+    background: var(--button-hover);
+}
+
+.join-now{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.join-now button{
+    width: 80%;
+    padding: 10px;
+    text-align: center;
+    background: var(--dark-button);
+    color: var(--sidebar-text-color);
+    border: #3a50723b 2px solid;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.5s ease-in;
+}
+.join-now button:hover{
+    background: var(--button-hover);
+    cursor: pointer;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+/* Hide default checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Slider background */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+/* Circle */
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+/* ON state */
+input:checked + .slider {
+  background-color: var(--dark-button);
+}
+
+/* Move circle perfectly */
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+
+.main-section-meet {
+    width: 90%;
+    height: calc(90vh - 64px);
+    display: grid;
+    padding: 20px;
+    margin-top: 64px;
+
+    justify-self: center;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 5px;
+
+    overflow: hidden;
+}
+
+.main-section-meet div {
+    width: 100%;
+    align-self: center;
+    justify-self: center;
+   
+    aspect-ratio: 16 / 9;
+
+    background: var(--dark-button);
+   border: #3a50728a 2px solid;
+    box-shadow: #3a50723b 1px 1px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+
+
+
+.hide{
+    display: none;
+}
