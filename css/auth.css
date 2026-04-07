@@ -171,3 +171,27 @@ right: 20px;
 
 }
 
+
+
+.home-btn{
+    color: var(--sidebar-color);
+    position: absolute;
+    
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+.home-btn i {
+    font-size: x-large;
+    align-self: center;
+    
+
+}
+
+.home-btn :hover{
+    color: var(--button-hover);
+}

@@ -173,3 +173,91 @@
     cursor: pointer;
     font-size: 12px;
 }
+
+
+/* Modal Overlay - Background blur/darken */
+.modal-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+
+ i:hover{
+    cursor: pointer;
+    color: var(--button-hover);
+ }
+/* Modal Box */
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+i{
+    color: var(--sidebar-color);
+}
+.btn-danger {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-danger:hover { background: #dc2626; }
+
+.delete-btn{
+    text-align: center;
+    color: #ef4444;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    background: #f8fafc;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.status-badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-left: auto;
+}
+
+.status-present { background: #d1fae5; color: #065f46; }
+.status-absent { background: #fee2e2; color: #991b1b; }
+
+.participant-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}

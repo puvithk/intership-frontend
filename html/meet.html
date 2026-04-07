@@ -38,7 +38,7 @@
        <p class="share-screen">Share Screen</p>   
     </div>
 
-       <div class="icons end-call" >
+       <div class="icons end-call" id="end-call" >
         <i class="fa-solid fa-phone-slash"></i>
            <p>End Call</p>
        </div>
@@ -46,9 +46,9 @@
     
     </div>
 </header>
-    <main class="main-section-join hide">
-        <div class="overlay hide"></div>
-        <div class="join-meeting hide">
+    <main class="main-section-join " id="main-section-join">
+        <div class="overlay "></div>
+        <div class="join-meeting ">
             <div class="video-settings">
                 <div class="info">
                     <h3>Camera Settings</h3>
@@ -70,7 +70,7 @@
                     <p>Start Camera / Stop Camera</p>
                 </div>
                 <div class="join-now">
-                    <button>Join now</button>
+                    <button id="join-now">Join now</button>
                 </div>
             </div>
             <div class="audio-settings">
@@ -79,7 +79,7 @@
         <h3>Audio Settings</h3>
     </div>
 
-    <!-- Microphone -->
+
     <div class="audio-options">
         <label>Select Microphone</label>
         <select id="microphone">
@@ -87,7 +87,7 @@
         </select>
     </div>
 
-    <!-- Speaker -->
+
     <div class="audio-options">
         <label>Select Output</label>
         <select id="output-audio">
@@ -116,6 +116,9 @@
     </main>
     <main>
       <div class="main-section-meet">
+    <div><p id="current-user"></p>
+    <video></video>
+    </div>
     <div></div>
     <div></div>
     <div></div>
@@ -127,18 +130,26 @@
     <div></div>
     <div></div>
     <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    
+   
       </div> 
       
       
     </main>
-    
+    <main class="main-section-end hide" id="end-screen">
+    <div class="overlay"></div>
+
+    <div class="end-card">
+        <h2 style="color: white;">Thanks for joining</h2>
+        <p>You have successfully left the meeting</p>
+
+        <button onclick="goHome()">Go to Home</button>
+        <p class="redirect-text">Redirecting in <span id="countdown">5</span>s...</p>
+    </div>
+</main>
 </main>
 
 </body>
+<script src="/script.js"></script>
 <script src="/js/meet.js"></script>
+
 </html>

@@ -391,8 +391,23 @@ border-bottom: #1b2433 2px solid;
 .live {
     background-color: #fee2e2;
     color: #991b1b;
- 
-    animation: pulse 2s infinite;
+    display: inline-block;
+    animation: pulse 3s infinite;
+    transition: all 0.5s ease-in;
+}
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .edit-btn{
@@ -409,6 +424,10 @@ border-bottom: #1b2433 2px solid;
 .edit-btn:hover {
     background-color: #3a5072;
    
+}
+#sidebar-profile h2,
+#sidebar-profile h4 {
+    opacity: 0.6;
 }
 .edit-btn:disabled{
     background-color: #cccccc;
@@ -458,6 +477,10 @@ border-bottom: #1b2433 2px solid;
     margin-left: auto;
     box-shadow: var(--box-shadow-color) 2px 2px 5px;
     border: var(--sidebar-color) 1px solid;
+       text-decoration: none;
+    color:var(--background-color);
+    font-family: var(--font-family);
+    color: white;
 }
 .logout a {
     text-decoration: none;
@@ -467,8 +490,9 @@ border-bottom: #1b2433 2px solid;
 }
 .logout:hover{
     background-color: var(--button-hover);
-
+    cursor: pointer;
 }
+
 .notification-count{
     position: absolute;
     top: -5px;
@@ -715,7 +739,7 @@ border-bottom: #1b2433 2px solid;
     gap: 25px;
     background: #ffffff;
     position: fixed;
-    z-index: 10;
+    z-index: 0;
    
 }
 .inner-cirle{
@@ -737,4 +761,52 @@ border-bottom: #1b2433 2px solid;
         opacity: 0.2;
     }
    
+}
+.details-card {
+    text-align: left;
+    max-width: 500px;
+}
+
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 10px;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.participants-scroll-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.participants-scroll-list li {
+    padding: 10px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.participants-scroll-list li::before {
+    content: "●";
+    color: #10b981; 
+}
+
+.details-footer {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 15px;
+    text-align: right;
+    font-size: 18px;
 }

@@ -305,7 +305,7 @@ input:checked + .slider:before {
 
     justify-self: center;
 
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
     gap: 5px;
 
@@ -322,15 +322,78 @@ input:checked + .slider:before {
     background: var(--dark-button);
    border: #3a50728a 2px solid;
     box-shadow: #3a50723b 1px 1px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
+
+display: flex;
+justify-content: center;
+position: relative;
+border-radius: 5px;
+}
+.main-section-meet div p  {
+    position: absolute;
+    bottom: 10px;
 }
 
+.main-section-end{
+    align-self: center;
 
-
+justify-self: center;    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    
+    z-index: 50;
+    top: 0;
+}
 
 .hide{
     display: none;
+}
+
+
+.end-card {
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 400px;
+    padding: 30px;
+    border-radius: 12px;
+
+    background: var(--sidebar-color);
+    color: var(--sidebar-text-color);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    box-shadow: 0 10px 30px #0000004d;
+    text-align: center;
+}
+
+.end-card h2 {
+    font-size: 22px;
+}
+
+.end-card button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+
+    background: red;
+    color: white;
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+.end-card button:hover {
+    background: #cc0000;
+}
+
+.redirect-text {
+    font-size: 12px;
+    opacity: 0.7;
 }

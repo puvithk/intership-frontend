@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const loadingElement = document.getElementById('loading')
-let userId = JSON.parse(localStorage.getItem("currentUser")).user_id
+
 let paramId = params.get('userid')
 let currentChat = null
 const channelList = document.getElementById('channel-list')
@@ -39,10 +39,11 @@ const refreshChats = async (check = true) => {
         const otherUserId = element.user1Id === userId ? element.user2Id : element.user1Id
         console.log("Other user " , otherUserId)
         const otherUsername = await getUserNameFromId(otherUserId)
+        
         console.log("Other user name " , otherUsername)
         li.innerHTML = `
             <button class="chat-user" onclick="openChat('${element.chatId}', '../img/profile2.png')">
-                <img src="../img/profile2.png" alt="User profile"/>
+                <img src="${otherUsername.profile_image ? URL.createObjectURL(otherUsername.profile_image ): '../img/defaultuser.png'}" alt="User profile"/>
                 <span>${otherUsername.name}</span>
             </button>
         `;
@@ -70,6 +71,7 @@ const formatTime = (timestamp) => {
 };
 const updateMessageBody = async (chatId) => {
     const messagesGrid = document.getElementById("message-grid");
+    const chatProfile = document.getElementById('chat-profile')
     messagesGrid.innerHTML = '';
 
     const allChatsMessages = await getChatMessages(chatId);
@@ -80,7 +82,7 @@ const updateMessageBody = async (chatId) => {
     const chatUserId = chatDetails.user1Id === userId ? chatDetails.user2Id : chatDetails.user1Id
     const chatUserName = await getUserNameFromId(chatUserId)
     chatName.innerText = chatUserName.name;
-
+    chatProfile.src = (chatUserName.profile_image) ? URL.createObjectURL(chatUserName.profile_image):'../img/defaultuser.png'
     allChatsMessages.forEach((element) => {
         const messageBody = document.createElement('div');
 

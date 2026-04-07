@@ -1,18 +1,30 @@
 
-const user = JSON.parse(localStorage.getItem('currentUser'))
-
-
-
 
 
 
 // Check the currect user and undate the text
-const checkUsernameUpdate = ()=>{
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"))
+const checkUsernameUpdate = async ()=>{
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"))
+    currentUser =  await getUserNameFromId(currentUser.user_id)
+    console.log(currentUser)
     const usernameTag = document.getElementById('user-name')
     const designationTag =document.getElementById("user-designation")
+    const organization = document.getElementById('organiation')
+    const email = document.getElementById('email')
+    const profileImage = document.getElementById('profile-image')
     usernameTag.innerText = currentUser.name
     designationTag.innerText = currentUser.designation
+    organization.innerText = currentUser.organization
+    email.innerText  =  currentUser.email
+    if(currentUser.profile_image){
+        const url = URL.createObjectURL(currentUser.profile_image);
+    profileImage.src = url;
+    }else {
+        profileImage.src =  '/img/defaultuser.png'
+    }
+    
+  
+
 }
 // check premission if admin as some extra previlage 
 const checkPremission = () =>{
@@ -70,6 +82,10 @@ const createUserForm = `
             <label for="dob">Date of Birth</label>
             <input type="date" id="dob" name="dob" required>
         </div>
+        <div class="form-input">
+            <label for="profile-image">Profile Image</label>
+            <input type="file" id="profile-image" name="profile-image" required accept="image/png, image/jpeg">
+        </div>
     </div>
 
     <div class="form-row">
@@ -125,6 +141,7 @@ const createUser =async (event) => {
     const designation = form.designation.value.trim();
     const work_details = form.work_details.value.trim();
     const password = form.password.value.trim();
+    const image = form["profile-image"].files[0];
     // check weather all fields are there 
     if (!name || !email || !organization || !designation || !work_details || !password) {
         notification("All fields are required", "fail");
@@ -162,7 +179,8 @@ const createUser =async (event) => {
         designation:designation,
         dob:dob, 
         work_details : work_details,
-        password:password
+        password:password ,
+        profile_image: image
     })
    
 
@@ -247,7 +265,7 @@ const handleCreateTeam = async (event) => {
     const team = createTeamObject({
         teamName: team_name,
         teamDescription: team_description,
-        teamLead: team_lead // ⚠️ fix here also
+        teamLead: team_lead 
     });
 
     await createTeamsDB(team)
@@ -255,6 +273,15 @@ const handleCreateTeam = async (event) => {
     notification(`Created team ${team.teamName}`, "success");
 };
 
-// Calling the functions automaticllay when loading 
+
+
+const loadingS = document.getElementById('loadingS')
+
+const refreshSettings = async ()=>{
+    // Calling the functions automaticllay when loading 
 checkPremission()
-checkUsernameUpdate()
+await checkUsernameUpdate()
+loadingS.style.display = 'none'
+
+}
+refreshSettings()

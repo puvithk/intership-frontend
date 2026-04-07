@@ -1,4 +1,36 @@
+let userId =  JSON.parse(localStorage.getItem('currentUser'))|| null
+const logout = document.getElementById('logout')
+console.log(userId)
+console.log(globalThis.location.pathname.split("/").pop())
+if(userId === null && globalThis.location.pathname.split("/").pop() != 'auth.html' && globalThis.location.pathname !='/'){
+    console.log("Do this ")
+    globalThis.location.href = '/html/auth.html'
+   
+    notification("Login and continue " , 'fail')
+   
+}else if( globalThis.location.pathname.split("/").pop() != 'auth.html') {
+    userId =  userId.user_id
+}
 
+
+if( globalThis.location.pathname.split("/").pop() == 'auth.html') {
+    const passwordInput = document.getElementById('password')
+const showPassword = document.getElementById('show-password')
+    console.log("Added the envent listern ")
+    const icons = ['fa-eye-slash' , 'fa-eye']
+showPassword.addEventListener('click' , ()=>{
+   
+    if(passwordInput.type === 'password'){
+        passwordInput.type = 'text'
+        showPassword.classList.remove(icons[0])
+        showPassword.classList.add(icons[1])
+    }else {
+        passwordInput.type = 'password'
+        showPassword.classList.remove(icons[1])
+        showPassword.classList.add(icons[0])
+    }
+})
+}
 // User indeXDB fuinctions
 const openUserDB = async ()=>{
     return new Promise((resolve, reject) => {
@@ -92,7 +124,7 @@ const getUserNameFromId = async (userId)=>{
     })
 }
 
-function createUserObject({user_id = crypto.randomUUID(),name,email,organization,status = null,designation = null,work_details = null,profile_image = null,password = null,dob = null,is_active = true
+function  createUserObject({user_id = crypto.randomUUID(),name,email,organization,status = null,designation = null,work_details = null,profile_image = null,password = null,dob = null,is_active = true
 }) {
     return {user_id,name,email,organization,status,designation,work_details,profile_image,password,dob,is_active};
 }
@@ -210,7 +242,67 @@ const getMeetingFromUserId =  async (userId)=>{
         return null
     }
 }
+const deleteMeetingById = async (meetingId) => {
+    try {
+        const db = await openMeetingDB();
 
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction("teamMeeting", "readwrite");
+            const store = tx.objectStore("teamMeeting");
+
+            const request = store.delete(meetingId);
+
+            request.onsuccess = () => {
+                resolve("Meeting deleted successfully");
+            };
+
+            request.onerror = (e) => {
+                reject(e.target.error);
+            };
+        });
+
+    } catch (e) {
+        console.log("Error deleting meeting:", e);
+        return null;
+    }
+};
+
+const updateMeetingStatus = async (meetingId, newStatus) => {
+    try {
+        const db = await openMeetingDB();
+
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction("teamMeeting", "readwrite");
+            const store = tx.objectStore("teamMeeting");
+
+            const getReq = store.get(meetingId);
+
+            getReq.onsuccess = () => {
+                const meeting = getReq.result;
+
+                if (!meeting) {
+                    reject(new Error("Meeting not found"));
+                    return;
+                }
+
+          
+                meeting.status = newStatus;
+
+                
+                const updateReq = store.put(meeting);
+
+                updateReq.onsuccess = () => resolve(meeting);
+                updateReq.onerror = (e) => reject(e.target.error);
+            };
+
+            getReq.onerror = (e) => reject(e.target.error);
+        });
+
+    } catch (e) {
+        console.log("Error updating meeting status:", e);
+        return null;
+    }
+};
 // Teams DB functions 
 
 function createTeamObject({teamId = crypto.randomUUID(),teamName,teamDescription = null,createdAt = new Date(),teamLead = null
@@ -397,7 +489,8 @@ const getAllTeamsOfUsers  = async (userId)=>{
     const teamNamesIds = []
     for(let element of uniqueTeamIds){
         const teamNames = await getTeamById(element)
-        teamNamesIds.push({teamId: element, teamName: teamNames.teamName})
+        console.log(teamNames)
+        teamNamesIds.push({teamId: element, teamName: teamNames.teamName , teamDescription: teamNames.teamDescription , teamLead :  teamNames.teamLead})
     }
     console.log("Team name and ids ")
     console.log(teamNamesIds)
@@ -691,6 +784,136 @@ const mapUsersToMeeting = async (userIds, meetingIds) => {
 };
 
 
+const mappedUsersToMeetingGetMapping = async (userId, meetingId) => {
+    try {
+        const db = await openUserMeetingDB();
+        console.log(userId , meetingId , "Ids ")
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction("userMeeting", "readonly"); 
+            const store = tx.objectStore("userMeeting");
+
+            const req = store.get([userId, meetingId]); 
+
+            req.onsuccess = () => {
+                resolve(req.result || null); 
+            };
+
+            req.onerror = (e) => {
+                reject(e.target.error);
+            };
+        });
+
+    } catch (e) {
+        console.log("Error fetching mapping:", e);
+        return null;
+    }
+};
+
+
+const updateTheParticipation = async ({ userId, meetingId, participated }) => {
+    try {
+        const db = await openUserMeetingDB();
+
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction("userMeeting", "readwrite");
+            const store = tx.objectStore("userMeeting");
+
+
+            const getReq = store.get([userId, meetingId]);
+
+            getReq.onsuccess = () => {
+                let record = getReq.result;
+
+            
+                if (!record) {
+                    reject(new Error("Mapping not found"));
+                    return;
+                }
+
+                
+                record.participated = participated;
+
+    
+                const updateReq = store.put(record);
+
+                updateReq.onsuccess = () => resolve(record);
+                updateReq.onerror = (e) => reject(e.target.error);
+            };
+
+            getReq.onerror = (e) => reject(e.target.error);
+        });
+
+    } catch (e) {
+        console.log("Error updating participation:", e);
+        return null;
+    }
+};
+
+// Gte the meeting sassigned to user 
+const getMeetingsByUserId = async (userId) => {
+    try {
+        const db = await openUserMeetingDB();
+
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction("userMeeting", "readonly");
+            const store = tx.objectStore("userMeeting");
+
+            const index = store.index("userId"); 
+            const request = index.getAll(userId);
+
+            request.onsuccess = () => {
+                resolve(request.result || []);
+            };
+
+            request.onerror = (e) => {
+                reject(e.target.error);
+            };
+        });
+
+    } catch (e) {
+        console.log("Error fetching meetings by userId:", e);
+        return [];
+    }
+};
+
+const getMappedUserFromMeetingId = async (meetingId) => {
+    try {
+        const db = await openUserMeetingDB();
+
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction("userMeeting", "readonly");
+            const store = tx.objectStore("userMeeting");
+
+            const index = store.index("meetingId"); 
+            const request = index.getAll(meetingId);
+
+            request.onsuccess = () => {
+                resolve(request.result || []);
+            };
+
+            request.onerror = (e) => {
+                reject(e.target.error);
+            };
+        });
+
+    } catch (e) {
+        console.log("Error fetching meetings by userId:", e);
+        return [];
+    }
+};
+
+
+
+const meetingsFromUserId = async (userId)=>{
+
+    const meetingParticipation = await getMeetingFromUserId(userId)
+    const meeting = []
+    for(let element of meetingParticipation){
+        const meet = await getMeetingFromId(element.meetingId)
+        meeting.push(meet)
+    }
+    return meeting;
+}
 /*Database Functions */
 
 
@@ -712,8 +935,7 @@ const refreshAll = async ()=>{
 refreshAll()
 
 
-const passwordInput = document.getElementById('password')
-const showPassword = document.getElementById('show-password')
+
 let users =[]
 
 const loading = `<div class="loading">
@@ -758,90 +980,7 @@ const changeBar = (classname) => {
 
 
 
-// checking which page is active 
-const setActiveMenu = () => {
 
-    const page = globalThis.location.pathname.split("/").pop()
-
-    console.log(page) // for debugging
-
-    if (page === "home.html") changeBar("dashboard")
-    if (page === "chats.html") changeBar("chats")
-    if (page === "teams.html") changeBar("teams")
-    if (page === "meeting.html") changeBar("meetings")
-    if (page === "community.html") changeBar("community")
-    if (page === "settings.html") changeBar("settings")
-
-}
-// Sidebar for all page 
-const sideBar = () => {
-    const currectUser = JSON.parse(localStorage.getItem('currentUser'))
-    const sidebar = `
-        <div class="sidebar-icon">
-            <a href="/" class="sidebar-icon-name">NexTeams</a>
-            <p class="sidebar-icon-name-mobile">NT</p>
-        </div>
-
-        <nav class="sidebar-nav"> 
-            <div class="dashboard">
-                <a href="../html/home.html">
-                    <img src="../img/dashboard.png" alt="Dashboard logo"/>
-                    <span>Dashboard</span>
-                </a>
-            </div>
-
-            <div class="chats">
-                <a href="../html/chats.html">
-                    <img src="../img/message.png" alt="Chats logo"/>
-                    <span>Chats</span>
-                </a>
-            </div>
-
-            <div class="teams">
-                <a href="../html/teams.html">
-                    <img src="../img/team.png" alt="Teams logo"/>
-                    <span>Teams</span>
-                </a>
-            </div>
-
-            <div class="meetings">
-                <a href="../html/meeting.html">
-                    <img src="../img/meeting.png" alt="Meetings logo"/>
-                    <span>Meetings</span>
-                </a>
-            </div>
-
-            <div class="community">
-                <a href="../html/community.html">
-                    <img src="../img/community.png" alt="Community logo"/>
-                    <span>Community</span>
-                </a>
-            </div>
-
-            <div class="settings">
-                <a href="../html/settings.html">
-                    <img src="../img/settings.png" alt="Settings logo"/>
-                    <span>Settings</span>
-                </a>
-            </div>
-        </nav>
-
-        <div class="sidebar-profile">
-            <img src="../img/profile.png" alt="User profile"/>
-            <div class="sidebar-profile-info">
-                <h2>${currectUser.name}</h2>
-                <h4>${currectUser.designation}</h4>
-            </div>
-        </div>
-    `
-
-    const asideSidebar = document.getElementsByClassName('sidebar')[0]
-    asideSidebar.innerHTML = sidebar
-
-    setActiveMenu()
-}
-
-sideBar()
 
 // Notificastion 
 const notification = (message , status ) => {
@@ -876,16 +1015,130 @@ const notification = (message , status ) => {
 };
 
 
-const icons = ['fa-eye-slash' , 'fa-eye']
-showPassword.addEventListener('click' , ()=>{
-   
-    if(passwordInput.type === 'password'){
-        passwordInput.type = 'text'
-        showPassword.classList.remove(icons[0])
-        showPassword.classList.add(icons[1])
-    }else {
-        passwordInput.type = 'password'
-        showPassword.classList.remove(icons[1])
-        showPassword.classList.add(icons[0])
-    }
+
+
+
+// Logout button 
+logout.addEventListener("click", ()=>{
+    console.log("Remcoing users ")
+    localStorage.removeItem("currentUser")
+    globalThis.location.href = '/'
 })
+
+
+
+// checking which page is active 
+const setActiveMenu = () => {
+
+    const page = globalThis.location.pathname.split("/").pop()
+
+    console.log(page) // for debugging
+
+    if (page === "home.html") changeBar("dashboard")
+    if (page === "chats.html") changeBar("chats")
+    if (page === "teams.html") changeBar("teams")
+    if (page === "meeting.html") changeBar("meetings")
+    if (page === "community.html") changeBar("community")
+    if (page === "settings.html") changeBar("settings")
+
+}
+// Sidebar for all page 
+const sideBar = () => {
+    // 🔹 Step 1: render static sidebar instantly
+    const sidebar = `
+        <div class="sidebar-icon">
+            <a href="/" class="sidebar-icon-name">NexTeams</a>
+            <p class="sidebar-icon-name-mobile">NT</p>
+        </div>
+
+        <nav class="sidebar-nav"> 
+            <div class="dashboard">
+                <a href="../html/home.html">
+                    <img src="../img/dashboard.png"/>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+
+            <div class="chats">
+                <a href="../html/chats.html">
+                    <img src="../img/message.png"/>
+                    <span>Chats</span>
+                </a>
+            </div>
+
+            <div class="teams">
+                <a href="../html/teams.html">
+                    <img src="../img/team.png"/>
+                    <span>Teams</span>
+                </a>
+            </div>
+
+            <div class="meetings">
+                <a href="../html/meeting.html">
+                    <img src="../img/meeting.png"/>
+                    <span>Meetings</span>
+                </a>
+            </div>
+
+            <div class="community">
+                <a href="../html/community.html">
+                    <img src="../img/community.png"/>
+                    <span>Community</span>
+                </a>
+            </div>
+
+            <div class="settings">
+                <a href="../html/settings.html">
+                    <img src="../img/settings.png"/>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- 🔹 Placeholder profile -->
+        <div class="sidebar-profile" id="sidebar-profile">
+            <img src="/img/defaultuser.png"/>
+            <div class="sidebar-profile-info">
+                <h2>Loading...</h2>
+                <h4>...</h4>
+            </div>
+        </div>
+    `;
+
+    document.querySelector('.sidebar').innerHTML = sidebar;
+
+    setActiveMenu();
+
+    // 🔹 Step 2: load profile separately (async)
+    loadSidebarProfile();
+};
+
+const loadSidebarProfile = async () => {
+    try {
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        currentUser = await getUserNameFromId(currentUser.user_id);
+
+        let profileImgSrc;
+
+        if (currentUser.profile_image) {
+            profileImgSrc = URL.createObjectURL(currentUser.profile_image); 
+        } else {
+            profileImgSrc = '/img/defaultuser.png';
+        }
+
+        // 🔥 Update ONLY profile section
+        const profileDiv = document.getElementById("sidebar-profile");
+
+        profileDiv.innerHTML = `
+            <img src="${profileImgSrc}" />
+            <div class="sidebar-profile-info">
+                <h2>${currentUser.name}</h2>
+                <h4>${currentUser.designation}</h4>
+            </div>
+        `;
+
+    } catch (e) {
+        console.log("Profile load failed", e);
+    }
+};
+sideBar()

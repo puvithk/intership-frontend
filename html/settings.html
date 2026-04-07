@@ -27,7 +27,7 @@
 
 
             <header class="header">
-                <h1>Settings</h1> <button class="logout"><a href="/">Logout</a></button>
+                <h1>Settings</h1> <button class="logout" id="logout">Logout</button>
                 <div class="header-notification-icons">
                     <img src="/img/notification.png" alt="Notification logo"/>
                     <span class="notification-count">3</span>
@@ -42,7 +42,10 @@
                 </div> 
                 
             </header>
-
+            <div class="loading" id="loadingS">
+                            <div class="inner-cirle"></div>
+                             <p>Loading Settings</p>
+                        </div>
             <div class="profile-section">
 
 
@@ -52,16 +55,16 @@
     <div class="card-header">
         <div class="user-info">
 
-            <img src="/img/profile.png" alt="Profile" class="avatar">
+            <img src="" alt="Profile" class="avatar" id="profile-image">
 
             <div class="user-text">
-                <h2 id="user-name">PUVITH</h2>
-                <p id="user-designation">Intern</p>
+                <h2 id="user-name">.</h2>
+                <p id="user-designation">.</p>
             </div>
 
         </div>
 
-        <button class="edit-btn">Edit Profile</button>
+      
     </div>
 
     <hr>
@@ -70,23 +73,17 @@
 
         <div class="info-item">
             <span class="icon">✉</span>
-            <span >puvith.kumar@endava</span>
+            <span id="email" ></span>
         </div>
 
         <div class="info-item">
             <span class="icon">🏢</span>
-            <span>Endava solutions</span>
+            <span id="organiation"></span>
         </div>
 
     </div>
 
-    <div class="profile-tabs">
-
-        <span class="active">Details</span>
-        <span>Task Board</span>
-        <span>Settings</span>
-
-    </div>
+    
     
 </div>
 <div class="admin-button">
@@ -96,7 +93,6 @@
 
 </div>
 <div class="admin-container">
-
 
 </div>
 </div>

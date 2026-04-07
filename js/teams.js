@@ -1,6 +1,7 @@
 let teamData = []
 const loadAllteamData = async()=>{
-   teamData = await getAllTeamsDB(); 
+   teamData = await getAllTeamsOfUsers(userId);
+   console.log("All teams :      ") 
    console.log(teamData)
 }
 const getUserNameFromIdTeams = async (userId)=>{
@@ -26,6 +27,7 @@ const loadteamData = async ()=>{
     // Loop all the data and put into the team grid 
     for(let team of teamData){
         let teamLeadName =await getUserNameFromIdTeams(team.teamLead)
+        const userOfTeam = await getMappedUsers(team.teamId)
         teams += `
         <article class="team-card" id="team-card">
         <h3>${team.teamName}</h3>
@@ -36,20 +38,24 @@ const loadteamData = async ()=>{
         <p>${team.teamDescription}</p>
         <div class="break"></div>
          <div class="members">
-            <p>3 Members</p>
+            <p>${userOfTeam.length} Members</p>
             <img src="/img/arrow.png" onclick="openTeamMemberModel('${team.teamName}' , '${team.teamId}')" alt="View team members" title="View team members">
         </div>
     </article>`
     }
     teamsGrid.innerHTML = teams
+    if(teamData.length === 0 ){
+        teamsGrid.innerHTML =`<p>No teams found</p>`    }
 }
+const loadingt  =  document.getElementById('loadingt')
 // Call automaticlly during loading of the page 
 const refreshTeamAll = async()=>{
     await loadAllteamData()
     await loadteamData()
+    loadingt.style.display ='none'
 
 }
-refreshTeamAll()
+
 
 // Fucntion to Update the team members details 
 const updateTeamMembersDetails = async (teamId) =>{
@@ -97,12 +103,19 @@ const openTeamMemberModel = async (teamName , teamId) =>{
     console.log('Team ID ')
     console.log(teamId)
     const allUserOfTeam = await getMappedUsers(teamId)
+    const teamDetails =  await getTeamById(teamId)
     console.log(allUserOfTeam)
     const teamDeatils = document.getElementById("team-details")
     const container = document.getElementsByClassName("content")[0]
     const sidebar = document.getElementsByClassName("sidebar")[0]
     const teamNameTag = document.getElementById("team-name")
     const addMembers = document.getElementById('add-members')
+    console.log(teamDeatils.teamLead , userId , "User and team ")
+    if(teamDetails.teamLead == userId){
+        addMembers.style.visibility = 'visible'
+    }else {
+        addMembers.style.visibility = 'hidden'
+    }
     const input = document.createElement('input')
     input.type ='hidden'
     input.value = teamId
@@ -156,6 +169,9 @@ const searchTeam =async (word) =>{
         </div>
     </article>`
     }
+    if(filterData.length === 0 ){
+        teamsGrid.innerHTML = `<p>No teams Found</p>`
+    }else 
     teamsGrid.innerHTML = teams 
 
 }
@@ -261,3 +277,5 @@ searchInput.addEventListener("input", () => {
 
 // Initial render
 renderUsers(users);
+
+refreshTeamAll()

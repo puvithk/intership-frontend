@@ -2,9 +2,25 @@
 const microphone = document.getElementById('microphone')
 const camera = document.getElementById('cameras')
 const speaker = document.getElementById("output-audio")
+const params = new URLSearchParams(window.location.search);
+const currentUser = document.getElementById('current-user')
 let cameras = []
 let microphones = []
 let speakers = []
+let meetingIdGlobal ;
+
+const checkPermision = async ()=>{
+    const meetingId = params.get('meetingid')
+    
+    const meeting =  await mappedUsersToMeetingGetMapping(userId , meetingId)
+    if(meeting){
+        console.log(meetingId , "Meeting 1")
+        meetingIdGlobal =  meetingId
+    }
+    console.log(meetingIdGlobal , "Meeting ")
+    return !!(meeting);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const toggle = document.getElementById("webcam-toggle");
     const video = document.getElementById("webcam");
@@ -106,3 +122,57 @@ async function getDevices() {
 }
 
 getDevices();
+const getPermission = async()=>{
+    const check = await checkPermision()
+    console.log(check)
+    if(!check){
+        notification("Not allowed" , 'fail')
+        console.log("Redireting ")
+        setInterval(()=>{
+                globalThis.location.href = '/html/home.html'
+        } , 5000)
+       
+    }
+
+}
+
+const mainSection =  document.getElementById('main-section-join')
+const joinNowBtn = document.getElementById('join-now')
+joinNowBtn.addEventListener('click' ,async ()=>{
+   console.log("Userid meetingId" , userId , meetingIdGlobal)
+    await updateTheParticipation({
+        userId:userId , meetingId:meetingIdGlobal , participated:true
+    })
+    const name = await getUserNameFromId(userId)
+    currentUser.innerText =  name.name
+    mainSection.classList.add('hide')
+})
+
+const endBtn = document.getElementById('end-call')
+endBtn.addEventListener('click' , ()=>{
+    showEndScreen()
+})
+const showEndScreen = () => {
+    const screen = document.getElementById("end-screen");
+    screen.classList.remove("hide");
+
+    let time = 5;
+    const countdownEl = document.getElementById("countdown");
+
+    const interval = setInterval(() => {
+        time--;
+        countdownEl.innerText = time;
+
+        if (time === 0) {
+            clearInterval(interval);
+
+            // 🔥 redirect (replace removes history)
+            window.location.replace("/html/home.html");
+        }
+    }, 1000);
+};
+
+const goHome = () => {
+    window.location.replace("/html/home.html");
+};
+getPermission()

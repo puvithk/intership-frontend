@@ -2,9 +2,48 @@ const user = JSON.parse(localStorage.getItem('currentUser'))
 
 
 
+ const parseCustomDate = (dateStr) => {
+
+    const [datePart, timePart] = dateStr.split(", ");
+
+    const [day, month, year] = datePart.split("/").map(Number);
+    const [hours, minutes, seconds] = timePart.split(":").map(Number);
+
+    return new Date(year, month - 1, day, hours, minutes, seconds);
+    };
 
 
+const getParticipationCount = async (meetingId)=>{
+    const meetingsAssignment = await getMappedUserFromMeetingId(meetingId)
+    console.log("Meetign assignment ", meetingsAssignment)
+    const filter = meetingsAssignment.filter((element)=>{
+        return element.participated === true
+    })
+    return filter.length
+}
 
+const getTimeLabel = (start, end) => {
+    const now = new Date();
+
+    if (now < start) {
+        const diffMs = start - now;
+
+        const minutes = Math.floor(diffMs / (1000 * 60));
+        const hours = Math.floor(minutes / 60);
+
+        if (minutes < 1) return "Join Now";
+        if (minutes < 60) return `Join Now`;
+        if (hours < 24) return `Join Now`;
+
+        return "Upcoming Meeting";
+    }
+
+    if (now >= start && now <= end) {
+        return "Join Now" ;
+    }
+
+    return "View Details";
+};
 
 // Update the meeting grid
 const updateMeetings =async () => {
@@ -16,54 +55,22 @@ const updateMeetings =async () => {
     console.log(meetings)
     let allMeetings = ""
     if(!meetings || meetings.length === 0){
-        meetingMain.innerHTML = `<p class='no-meeting'>No Meeting </p>`
+        meetingBody.innerHTML = `<p class='no-meeting'>No Meeting </p>`
         return 
     }
     meetings.sort((a, b) => {
     return  new Date(b.startTime) - new Date(a.startTime);
         } );
     meetings.reverse()
-    meetings.forEach(element => {
-      
-        // if(element.participants.length === 0){
-        //     participantsHTML = `<p>No participants</p>`
-        // }else {
-        //     participantsHTML = element.participants
-        //     .map(imgsPath => `<img src="${imgsPath}" alt="user"/>`)
-        //     .join("")
-          
-        // }
-      
-    const parseCustomDate = (dateStr) => {
-    const [datePart, timePart] = dateStr.split(", ");
-
-    const [day, month, year] = datePart.split("/").map(Number);
-    const [hours, minutes, seconds] = timePart.split(":").map(Number);
-
-    return new Date(year, month - 1, day, hours, minutes, seconds);
-    };
+    for(let element of meetings){
     const now = new Date();
     const start = parseCustomDate(element.startTime);
     const end = parseCustomDate(element.endTime);
 
-    let action = "";
+    let action = getTimeLabel(start , end);
 
-    if (now < start) {
-        const diffMs = start - now;
-
-        const minutes = Math.floor(diffMs / (1000 * 60));
-        const hours = Math.floor(minutes / 60);
-
-        action = hours > 0
-            ? `Starts in ${hours}h ${minutes % 60}m`
-            : `Starts in ${minutes}m`;
-
-    } else if (now >= start && now <= end) {
-        action = "Join Now";
-    } else {
-        action = "View Details";
-    }
-    let participantsHTML = `<p>No participants</p>`
+     const participantsCount = await getParticipationCount(element.meetingId)
+        let participantsHTML= `<p>${participantsCount}</p>` ;
                 allMeetings += `
         <tr>
             <td class="project-name">${element.meetingName}</td>
@@ -73,16 +80,131 @@ const updateMeetings =async () => {
                 </div>
             </td>
             <td><span class="status ${element.status.toLowerCase()}">${element.status}</span></td>
-            <td>${element.startTime}</td>
-            <td><button class="edit-btn">${action}</button></td>
+            <td>${element.startTime}</td> <td><button class="edit-btn" onclick=openMeeting('${element.meetingId}') ${(now >= start) ? '' :'disabled'}>${action}</button></td>
+        <td style='text-align:center ;'>
+            <i onclick="deleteMeeting('${element.meetingId}')" class="fa-solid fa-trash"></i>
+            </td>
         </tr>
         `
-    })
+    }
 
           meetingBody.innerHTML = allMeetings  
     
 
 }
+
+
+let meetingIdToDelete = null;
+
+
+const deleteMeeting = (meetingId) => {
+    meetingIdToDelete = meetingId; 
+    document.getElementById('delete-modal').style.display = 'flex'; 
+};
+
+
+document.getElementById('cancel-btn').addEventListener('click', () => {
+    document.getElementById('delete-modal').style.display = 'none';
+    meetingIdToDelete = null; 
+});
+
+// 3. Handle Confirm Delete button
+document.getElementById('confirm-delete-btn').addEventListener('click', async () => {
+    if (meetingIdToDelete) {
+       
+        deleteMeetingById(meetingIdToDelete);
+        console.log("Deleted meeting ")
+        
+        await updateMeetings(); 
+        
+        // Close modal
+        document.getElementById('delete-modal').style.display = 'none';
+        meetingIdToDelete = null;
+    }
+});
+
+
+// On meeting Fucntion to trigger meeting
+
+// 1. Update your existing openMeeting function
+const openMeeting = async (meetingId) => {
+    const meeting = await getMeetingFromId(meetingId);
+    const now = new Date();
+    const start = parseCustomDate(meeting.startTime);
+    const end = parseCustomDate(meeting.endTime);
+
+    // Check if meeting is completed (View Details mode)
+    if (end < now) {
+        viewMeetingDetails(meetingId);
+        return;
+    }
+
+    // Existing logic for Live/Upcoming meetings
+    if (start > now) {
+        notification("Meeting Yet to start", 'fail');
+    } else {
+        const url = `/html/meet.html?meetingid=${meetingId}`;
+        window.open(url, '_blank');
+    }
+};
+
+// 2. New function to fetch and show details
+const viewMeetingDetails = async (meetingId) => {
+    const meeting = await getMeetingFromId(meetingId);
+    const participantsList = document.getElementById('participants-list');
+    
+    // Set UI elements
+    document.getElementById('details-meeting-name').innerText = meeting.meetingName;
+    document.getElementById('details-modal').style.display = 'flex';
+    participantsList.innerHTML = "<li>Loading...</li>";
+
+    
+    const allMappings = await getMappedUserFromMeetingId(meetingId);
+    
+    if (allMappings.length === 0) {
+        participantsList.innerHTML = "<li>No users were invited to this meeting.</li>";
+        return;
+    }
+
+ 
+    let presentCount = 0;
+    let absentCount = 0;
+    let listHTML = "";
+
+  
+    for (let record of allMappings) {
+        const user = await getUserNameFromId(record.userId);
+        const name = user ? user.name : "Unknown User";
+        
+        if (record.participated) {
+            presentCount++;
+            listHTML += `
+                <li class="participant-item">
+                    <span>${name}</span>
+                    <span class="status-badge status-present">Attended</span>
+                </li>`;
+        } else {
+            absentCount++;
+            listHTML += `
+                <li class="participant-item">
+                    <span>${name}</span>
+                    <span class="status-badge status-absent">Not Attended</span>
+                </li>`;
+        }
+    }
+
+    // 4. Update the counts and the list
+    document.getElementById('attended-count').innerText = presentCount;
+    document.getElementById('absent-count').innerText = absentCount;
+    document.getElementById('total-present-count').innerText = `${presentCount} / ${allMappings.length}`;
+    participantsList.innerHTML = listHTML;
+};
+
+const closeDetailsModal = () => {
+    document.getElementById('details-modal').style.display = 'none';
+};
+
+
 
 
 // create the meeting 
@@ -142,6 +264,7 @@ const createMeeting = async (event)=>{
 
   
     await mapUsersToMeeting(combinedUserIds , meetingId)
+    await mapUsersToMeeting(userId , meetingId)
     await updateMeetings();
         notification("Meeting Created Succesfully" , "success")
         setTimeout(()=>{
@@ -151,7 +274,7 @@ const createMeeting = async (event)=>{
     }
 
 // Calling function automatically when loading 
-updateMeetings()
+
 
 
 
@@ -167,7 +290,7 @@ let allTeams = [];
 
 const loadData = async () => {
     allUsers = await getAllUsersDB();        
-    allTeams = await getAllTeamsDB();     
+    allTeams = await getAllTeamsOfUsers(userId);     
 };
 
 loadData();
@@ -298,3 +421,6 @@ const renderTeams = () => {
         container.appendChild(tag);
     });
 };
+
+// meeting model open 
+updateMeetings()
