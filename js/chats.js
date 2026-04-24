@@ -8,14 +8,14 @@ const chatList = document.getElementById('chat-list')
 let currentChatId = null
 let channels = []
 
-
+// Refresh All the channel list 
 const refreshChannels = async () => {
     if (!userId) {
         userId = JSON.parse(localStorage.getItem('currentUser')).user_id;
     }
 
     channelList.innerHTML = '';
-
+    // Get the list fron the database
     channels = await getAllTeamsOfUsers(userId);
 
     channels.forEach(({ teamId, teamName }) => {
@@ -29,7 +29,10 @@ const refreshChannels = async () => {
         channelList.innerHTML  = '<p>No Channels found</p>'
     }
 };
+
+// Refresh all the chat list 
 const refreshChats = async (check = true) => {
+    // Get the chat by the user 
     const allChats = await getChatsByUser(userId);
 
     chatList.innerHTML = ''; 
@@ -38,6 +41,7 @@ const refreshChats = async (check = true) => {
         const li = document.createElement('li');
         const otherUserId = element.user1Id === userId ? element.user2Id : element.user1Id
         console.log("Other user " , otherUserId)
+        // Get the username 
         const otherUsername = await getUserNameFromId(otherUserId)
         
         console.log("Other user name " , otherUsername)
@@ -50,7 +54,7 @@ const refreshChats = async (check = true) => {
 
         chatList.append(li);
     }
-
+    // if no chats 
     if(allChats.length === 0 ){
         chatList.innerHTML = `<p>No Chats Found</p>`
         const messagesGrid = document.getElementById("message-window");
@@ -59,9 +63,11 @@ const refreshChats = async (check = true) => {
         messagesGrid.style.padding = '10px'
        }
     if (check && allChats.length > 0) {
+        // Update the first meesgae body 
         await updateMessageBody(allChats[0].chatId);
     }
 };
+// Formate time 
 const formatTime = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleTimeString([], {
@@ -69,20 +75,25 @@ const formatTime = (timestamp) => {
         minute: '2-digit'
     });
 };
+
+
+// Onlick updateing the message body 
 const updateMessageBody = async (chatId) => {
     const messagesGrid = document.getElementById("message-grid");
     const chatProfile = document.getElementById('chat-profile')
     messagesGrid.innerHTML = '';
-
+    // Get Message based on chatId which is sorted
     const allChatsMessages = await getChatMessages(chatId);
     let chatDetails = await getChatsById(chatId);
     chatDetails = chatDetails[0];
 
     const chatName = document.getElementById("chat-name");
     const chatUserId = chatDetails.user1Id === userId ? chatDetails.user2Id : chatDetails.user1Id
+    
     const chatUserName = await getUserNameFromId(chatUserId)
     chatName.innerText = chatUserName.name;
     chatProfile.src = (chatUserName.profile_image) ? URL.createObjectURL(chatUserName.profile_image):'../img/defaultuser.png'
+    // Update in the message body 
     allChatsMessages.forEach((element) => {
         const messageBody = document.createElement('div');
 
@@ -103,6 +114,7 @@ const updateMessageBody = async (chatId) => {
     currentChat = chatDetails.userIds.find(id => id !== userId);
     currentChatId = chatDetails.chatId;
 };
+// Refresh the chat page 
 const updateChats = async () =>{
     await refreshChannels()
     await refreshChats()
@@ -110,17 +122,19 @@ const updateChats = async () =>{
 }
 // On  click to open new chats 
 const openChat = async(name , path)=>{
-    console.log("Name id " , name)
+   
     await updateMessageBody(name)
     
 }
+
+// Send the chat 
 const sendMessages = async () => {
     if (!currentChatId) {
         const user1 = userId;
         const userName = await getUserNameFromId(paramId);
 
         const existingChat = await getChatBetweenUsers(user1, paramId);
-
+        
         if (existingChat) {
             currentChatId = existingChat.chatId;
         } else {
@@ -129,7 +143,7 @@ const sendMessages = async () => {
                 user1Id: user1,
                 user2Id: paramId
             });
-
+            // Updating in database 
             await addChatDB(chat);
             currentChatId = chat.chatId;
         }
@@ -153,6 +167,8 @@ const sendMessages = async () => {
     messageInput.value = '';
 };
 
+
+// Open the chat message 
 const openChatMessages = async ()=>{
     const chatList = document.getElementById('chat-list-section')
     chatList.style.display = 'none'
@@ -169,16 +185,18 @@ const getChatBetweenUsers = async (userA, userB) => {
         chat.userIds.includes(userB)
     );
 };
+
+
 const init = async () => {
     if (paramId) {
         const existingChat = await getChatBetweenUsers(userId, paramId);
         const user = await getUserNameFromId(paramId)
        if (!user) {
-    notification('User not found', 'fail');
+            notification('User not found', 'fail');
 
-    setTimeout(() => {
-        globalThis.location.href = '/html/chats.html';
-    }, 5000);
+            setTimeout(() => {
+             globalThis.location.href = '/html/chats.html';
+            }, 5000);
 }
         if (existingChat) {
             currentChatId = existingChat.chatId;

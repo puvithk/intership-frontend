@@ -47,7 +47,7 @@ button:disabled{
     color: #E5E7EB;
     font-family: "Inter", sans-serif ;
     font-weight: 600;
-    
+ 
     
     width: 250px;
     transition: all 0.5s ease;
@@ -225,6 +225,8 @@ justify-content: center;
     flex-direction: column;
     height: 100vh;
      overflow-y: auto;
+     overflow-x: hidden;
+     position: relative;
 
 }
 .header{
@@ -266,15 +268,17 @@ justify-content: center;
 
 .footer{
 
-    position: fixed;
+    position: absolute;
     background: var(--sidebar-color);
     margin: 0;
     text-align: center;
     padding: 10px;
-    width: calc(100vw - 270px);
+    
     bottom: 0;
     align-self: center;
     right: 0;
+    left: 0;
+    width: 100%;
 
 }
 .footer p {
@@ -677,7 +681,7 @@ border-bottom: #1b2433 2px solid;
          width: 200px;
         font-size: small;
     }
-    
+   
 }
 @media  screen and (max-width:1025px ) {
 
@@ -809,4 +813,27 @@ border-bottom: #1b2433 2px solid;
     padding-top: 15px;
     text-align: right;
     font-size: 18px;
+}
+
+.content {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    position: relative !important;
+    height: auto !important; 
+}
+
+
+.footer {
+
+    height: 50px; 
+    width: 100%;
+    box-sizing: border-box; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative !important; 
+    margin-top: auto; 
+    background: var(--sidebar-color);
+    color: var(--sidebar-text-color);
 }

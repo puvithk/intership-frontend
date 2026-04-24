@@ -215,3 +215,25 @@
 @media screen and  (max-width : 1024px) {
  
 }
+
+
+
+.content {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    position: relative !important;
+    height: auto !important; 
+}
+
+
+.footer {
+    position: relative !important; 
+    margin-top: auto !important;  
+    bottom: auto !important;  
+    width: 100% !important;
+    background: var(--sidebar-color);
+    padding: 20px;
+    z-index: 10;
+    height: 64px;
+}

@@ -1,4 +1,5 @@
 let meetings  =[]
+// Time stamp converter 
  const parseCustomDate = (dateStr) => {
 
     const [datePart, timePart] = dateStr.split(", ");
@@ -9,7 +10,7 @@ let meetings  =[]
     return new Date(year, month - 1, day, hours, minutes, seconds);
     };
 
-
+// Get the action
 const getTimeLabel = (start, end) => {
     const now = new Date();
 
@@ -33,9 +34,9 @@ const getTimeLabel = (start, end) => {
     return "View Details";
 };
 
+// Get the partipation count 
 const getParticipationCount = async (meetingId)=>{
     const meetingsAssignment = await getMappedUserFromMeetingId(meetingId)
-    console.log("Meetign assignment ", meetingsAssignment)
     const filter = meetingsAssignment.filter((element)=>{
         return element.participated === true
     })
@@ -137,22 +138,20 @@ document.getElementById('confirm-delete-btn').addEventListener('click', async ()
 });
 
 
-// On meeting Fucntion to trigger meeting
 
-// 1. Update your existing openMeeting function
+// Update your existing openMeeting function
 const openMeeting = async (meetingId) => {
     const meeting = await getMeetingFromId(meetingId);
     const now = new Date();
     const start = parseCustomDate(meeting.startTime);
     const end = parseCustomDate(meeting.endTime);
 
-    // Check if meeting is completed (View Details mode)
+    // Check if meeting is completed
     if (end < now) {
         viewMeetingDetails(meetingId);
         return;
     }
 
-    // Existing logic for Live/Upcoming meetings
     if (start > now) {
         notification("Meeting Yet to start", 'fail');
     } else {
@@ -161,7 +160,7 @@ const openMeeting = async (meetingId) => {
     }
 };
 
-// 2. New function to fetch and show details
+// New function to fetch and show details
 const viewMeetingDetails = async (meetingId) => {
     const meeting = await getMeetingFromId(meetingId);
     const participantsList = document.getElementById('participants-list');

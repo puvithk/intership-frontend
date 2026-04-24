@@ -113,7 +113,7 @@ document.getElementById('confirm-delete-btn').addEventListener('click', async ()
     if (meetingIdToDelete) {
        
         deleteMeetingById(meetingIdToDelete);
-        console.log("Deleted meeting ")
+        
         
         await updateMeetings(); 
         
@@ -126,14 +126,14 @@ document.getElementById('confirm-delete-btn').addEventListener('click', async ()
 
 // On meeting Fucntion to trigger meeting
 
-// 1. Update your existing openMeeting function
+// Update your existing openMeeting function
 const openMeeting = async (meetingId) => {
     const meeting = await getMeetingFromId(meetingId);
     const now = new Date();
     const start = parseCustomDate(meeting.startTime);
     const end = parseCustomDate(meeting.endTime);
 
-    // Check if meeting is completed (View Details mode)
+    // Check if meeting is completed 
     if (end < now) {
         viewMeetingDetails(meetingId);
         return;
@@ -148,7 +148,7 @@ const openMeeting = async (meetingId) => {
     }
 };
 
-// 2. New function to fetch and show details
+// New function to fetch and show details
 const viewMeetingDetails = async (meetingId) => {
     const meeting = await getMeetingFromId(meetingId);
     const participantsList = document.getElementById('participants-list');

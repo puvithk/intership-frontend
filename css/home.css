@@ -75,7 +75,7 @@ a {
 }
 .deatils-login button:hover{
     background-color: var(--button-hover);
-    border: none;
+    border: var(--sidebar-hover-color) 1px solid;
     scale: 1.05;
 }
 .text-image{
@@ -200,21 +200,6 @@ i:hover{
     transition: 0.2s;
 }
 
-.footer{
-   
-   position: fixed;
-   bottom: 0px;
-
-
-    background: var(--sidebar-color);
-    margin: 0;
-    text-align: center;
-    padding: 10px;
-
-}
-.footer p {
-    color: var(--sidebar-text-color);
-}
 
 @media (max-width:1080px){
 

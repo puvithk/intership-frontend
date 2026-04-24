@@ -2,7 +2,7 @@ let userId =  JSON.parse(localStorage.getItem('currentUser'))|| null
 const logout = document.getElementById('logout')
 console.log(userId)
 console.log(globalThis.location.pathname.split("/").pop())
-if(userId === null && globalThis.location.pathname.split("/").pop() != 'auth.html' && globalThis.location.pathname !='/'){
+if(userId === null && globalThis.location.pathname.split("/").pop() != 'auth.html' && globalThis.location.pathname !='/' &&  globalThis.location.pathname.split("/").pop() != 'index.html'){
     console.log("Do this ")
     globalThis.location.href = '/html/auth.html'
    

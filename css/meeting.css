@@ -26,12 +26,7 @@
     position: relative !important;
     overflow-x: hidden;
 }
-.footer {
-    position: fixed;
-    width: calc(100vw - 270px);
-    bottom: 0;
-    align-self: center;
-}
+
 .meeting-card{
     background: white;
     padding: 30px 40px;
@@ -177,7 +172,7 @@
 
 /* Modal Overlay - Background blur/darken */
 .modal-overlay {
-    display: none; /* Hidden by default */
+    display: none; 
     position: fixed;
     top: 0;
     left: 0;
@@ -194,7 +189,7 @@
     cursor: pointer;
     color: var(--button-hover);
  }
-/* Modal Box */
+
 .modal-content {
     background: white;
     padding: 30px;
@@ -260,4 +255,16 @@ i{
     display: flex;
     align-items: center;
     width: 100%;
+}
+
+
+
+
+
+
+
+.project-details-table {
+    width: 100%;
+    margin-bottom: 60px !important; 
+    border-collapse: collapse;
 }
